@@ -5,11 +5,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("hello.urls")),
+    path('api-auth/', include('rest_framework.urls')),
+    #path("", include("hello.urls")),
     path('accounts/', include('accounts.urls')),
-    path('mainfunc/', include('mainfunc.urls')),
+    path('', include('mainfunc.urls')),
 ]
 
+# DDT 보여주기 위한 코드
 import mimetypes
 mimetypes.add_type("application/javascript", ".js", True)
 
