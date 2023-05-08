@@ -9,6 +9,6 @@ from .serializers import SignupSerializer
 class SignupView(CreateAPIView):
     model = get_user_model()
     serializer_class = SignupSerializer
-    Permission_classes = [
-        AllowAny,#실제로 회원가입할 때는 로그인은 되며 ㄴ안되니까
+    permission_classes = [
+        AllowAny,#실제로 회원가입할 때는 로그인은 되면 안됨
     ]
