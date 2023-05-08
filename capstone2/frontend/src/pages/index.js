@@ -1,7 +1,20 @@
 import React from "react";
+import AppLayout from "components/AppLayout";
+import { Route, Routes } from "react-router-dom";
+import About from "./About";
+import Home from "./Home";
+import AccountRoutes from "./accounts";
 
 function Root(){
-    return <div>최상위 component</div>
+    return (
+        <AppLayout>
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/about" element={<About />}/>
+                <Route path="/accounts/*" element={<AccountRoutes />} />
+            </Routes>
+        </AppLayout>
+    );
 }
 
 export default Root;
