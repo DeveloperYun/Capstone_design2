@@ -1,0 +1,32 @@
+ .app{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+        "header header"
+        "contents contents"
+        "footer footer";
+
+    background-color: lightyellow;
+    border: 3px solid #333;
+    width:  1024px;
+    max-width: 100%;
+    margin: 10px auto;
+
+    .header{
+        grid-area: header;
+    }
+
+    .sidebar{
+        grid-area: sidebar;
+    }
+
+    .contents{
+        grid-area: contents;
+    }
+
+    
+    .footer{
+        grid-area: footer;
+        text-align: center;
+    }
+ }
