@@ -3,12 +3,16 @@ import Axios from "axios";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Card, Form, Input, Button, notification } from "antd";
-import useLocalStorage from "utils/useLocalStorage";
+import { setToken, useAppContext  } from "store";
 
 export default function Login(){
+    const {  dispatch } = useAppContext();
     const history = useNavigate();
-    const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
     const [fieldErrors, setFieldErrors] = useState({});
+
+    const { from: loginRedirectUrl } = {
+        from: {pathname: "/"}
+    };
 
     const onFinish = values => {
         async function fn(){
@@ -23,13 +27,14 @@ export default function Login(){
                     data: { token: jwtToken }
                 } = response;
                 
-                setJwtToken(jwtToken);
+                dispatch(setToken(jwtToken));
+                //setJwtToken(jwtToken);
                 notification.open({
                     message: "로그인 성공",
                     icon: <SmileOutlined style={{color: "#10Bee9"}}/>
                 });
 
-                // history("/accounts/login/");
+                history(loginRedirectUrl);
             }
             catch(error){
                 if(error.response){
