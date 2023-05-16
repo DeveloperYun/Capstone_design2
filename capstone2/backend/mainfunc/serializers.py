@@ -48,6 +48,6 @@ class LabelSerializer(serializers.ModelSerializer):
         instance = Label.objects.create(**validated_data)
         image_set = self.context['request'].FILES
         for image_data in image_set.getlist('image'):
-            Post.objects.create(label=instance, image=image_data)
+            Post.objects.create(label=instance,author=self.context['request'].user, image=image_data)
         return instance 
 
