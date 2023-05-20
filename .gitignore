@@ -1,5 +1,12 @@
+*.pyz
+__pycache__
+*.log
+db.sqlite3
+
 # folder
 data/
 imgs/
 .ipynb_checkpoints/
+
 *.pth
+
