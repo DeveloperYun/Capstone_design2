@@ -3,6 +3,7 @@ from .serializers import PostSerializer, LabelSerializer
 from .models import Post
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
+from PIL import Image
 
 # CRUD가 모두 들어간 API를 지원
 class PostViewSet(ModelViewSet):
