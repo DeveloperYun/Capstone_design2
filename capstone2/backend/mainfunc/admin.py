@@ -6,7 +6,7 @@
 # # admin.site.register(PostImage)
 
 from django.contrib import admin
-from .models import Post, Label
+from .models import Post, Label, Model
 
 @admin.register(Label)
 class LabelAdmin(admin.ModelAdmin):
@@ -18,3 +18,7 @@ class PostAdmin(admin.ModelAdmin):
 
     def label_name(self, obj):
         return obj.label.label_name
+    
+@admin.register(Model)
+class ModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'author', 'name', 'file' ,'learning_time', 'accuracy']

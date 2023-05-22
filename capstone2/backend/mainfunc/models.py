@@ -21,4 +21,10 @@ class Post(models.Model):
     def get_label_name(self):
         return self.label.label_name
     
-    
+class Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, default='')
+    learning_time = models.CharField(max_length=10,default='')
+    accuracy = models.CharField(max_length=10, default='')
+    file = models.FileField(upload_to=image_upload_path, blank=True, null=True)
