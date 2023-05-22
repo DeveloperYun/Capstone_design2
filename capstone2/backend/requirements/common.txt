@@ -3,3 +3,5 @@ djangorestframework
 djangorestframework-jwt
 django-cors-headers
 pillow
+torch~=1.13.1
+numpy
