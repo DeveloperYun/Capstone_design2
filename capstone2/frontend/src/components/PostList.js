@@ -18,13 +18,13 @@ function PostList(){
         Axios.get(apiurl, { headers })
             .then(response => {
                 const { data } = response;
-                console.log("loaded response : ",response);
                 setPostList(data);
+                console.log("loaded response : ",response);
+
             })
             .catch(error => {
-
+                console.log("error: ",error);
             });
-        console.log("mounted");
     }, []);
 
     return(
@@ -32,9 +32,11 @@ function PostList(){
             {postList.length === 0 &&
                 <Alert type="warning" message="포스팅이 없네요 :("/>
             }
-            {postList.map(post => {
-                return <Post post={post} key={post.id}/>
-            })}
+            {
+                postList.map(post => {
+                    return <Post post={post} key={post.id}/>
+                })
+            }
         </div>
     );
 }
