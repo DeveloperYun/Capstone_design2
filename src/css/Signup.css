@@ -31,7 +31,7 @@ h2 {
 
 /* STRUCTURE */
 
-.login {
+.wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -41,7 +41,7 @@ h2 {
   padding: 20px;
 }
 
-#formContentLogin {
+#formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
@@ -55,7 +55,7 @@ h2 {
   text-align: center;
 }
 
-#formFooterLogin {
+#formFooter {
   background-color: #f6f6f6;
   border-top: 1px solid #dce8f1;
   padding: 25px;
@@ -66,13 +66,13 @@ h2 {
 
 /* TABS */
 
-h2.inactiveSignup {
-  color: #cccccc;
-}
-
-h2.activeLogin {
+h2.inactive {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
+}
+
+h2.active {
+  color: #cccccc;
 }
 
 /* FORM TYPOGRAPHY*/
@@ -107,9 +107,9 @@ input[type="reset"]:hover {
   background-color: #39ace7;
 }
 
-input[type="button"]:activelogin,
-input[type="submit"]:activelogin,
-input[type="reset"]:activelogin {
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -150,7 +150,7 @@ input[type="text"]:placeholder {
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
-.fadeInDownLogin {
+.fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
   -webkit-animation-duration: 1s;
@@ -211,7 +211,7 @@ input[type="text"]:placeholder {
   }
 }
 
-.fadeInLogin {
+.fadeIn {
   opacity: 0;
   -webkit-animation: fadeIn ease-in 1;
   -moz-animation: fadeIn ease-in 1;
@@ -226,32 +226,32 @@ input[type="text"]:placeholder {
   animation-duration: 1s;
 }
 
-.fadeInLogin.first {
+.fadeIn.first {
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
-.fadeInLogin.second {
+.fadeIn.second {
   -webkit-animation-delay: 0.6s;
   -moz-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
-.fadeInLogin.third {
+.fadeIn.third {
   -webkit-animation-delay: 0.8s;
   -moz-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
 
-.fadeInLogin.fourth {
+.fadeIn.fourth {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
 }
 
 /* Simple CSS3 Fade-in Animation */
-.underlineHoverLogin:after {
+.underlineHover:after {
   display: block;
   left: 0;
   bottom: -10px;
@@ -262,11 +262,11 @@ input[type="text"]:placeholder {
   transition: width 0.2s;
 }
 
-.underlineHoverLogin:hover {
+.underlineHover:hover {
   color: #0d0d0d;
 }
 
-.underlineHoverLogin:hover:after {
+.underlineHover:hover:after {
   width: 100%;
 }
 

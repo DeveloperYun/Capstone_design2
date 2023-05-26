@@ -76,15 +76,15 @@ export default function Login() {
   };
 
   return (
-    <div class="wrapper fadeInDown">
-      <div id="formContent">
+    <div class="login fadeInDownLogin">
+      <div id="formContentLogin">
         {/* <!-- Tabs Titles --> */}
-        <h2 class="active"> LOGIN </h2>
-        <h2 class="inactive underlineHover" onClick={handleSignUp}>
+        <h2 class="activeLogin"> LOGIN </h2>
+        <h2 class="inactiveSignup underlineHoverLogin" onClick={handleSignUp}>
           Sign Up{" "}
         </h2>
         {/* <!-- Icon --> */}
-        {/* <div class="fadeIn first">
+        {/* <div class="fadeInLogin first">
         <img
           src="http://danielzawadzki.com/codepen/01/icon.svg"
           id="icon"
@@ -97,23 +97,23 @@ export default function Login() {
           <input
             type="text"
             id="login"
-            class="fadeIn second"
+            class="fadeInLogin second"
             name="login"
             placeholder="login"
           />
           <input
             type="text"
             id="password"
-            class="fadeIn third"
+            class="fadeInLogin third"
             name="login"
             placeholder="password"
           />
-          <input type="submit" class="fadeIn fourth" value="Log In" />
+          <input type="submit" class="fadeInLogin fourth" value="Log In" />
         </form>
 
         {/* <!-- Remind Passowrd --> */}
-        <div id="formFooter">
-          <a class="underlineHover" href="#" onClick={handleHome}>
+        <div id="formFooterLogin">
+          <a class="underlineHoverLogin" href="#" onClick={handleHome}>
             Home
           </a>
         </div>
