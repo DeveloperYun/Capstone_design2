@@ -26,6 +26,7 @@ export default function PostNewForm(){
         setFileList(fileList);
     };
 
+    // 이미지 preview
     const handlePreviewImage = async file => {
         if (!file.url && !file.preview) {
           file.preview = await getBase64FromFile(file.originFileObj);
@@ -40,18 +41,22 @@ export default function PostNewForm(){
     const handleFinish = async fieldValues => {
         console.log("fieldValues: ", fieldValues);
         const {
+          dataset,
           label_name,
           images : { fileList }
         } = fieldValues;
 
         console.log("> ",fileList);
 
+        // Form data 구조 수정
         const formData = new FormData();
+        formData.append("dataset", dataset);
         formData.append("label_name", label_name);
         fileList.forEach(file => {
             formData.append("image", file.originFileObj);
         });
 
+        // formData 내용물 확인
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));
         }
@@ -86,13 +91,29 @@ export default function PostNewForm(){
     
     return (
         <div>
-            <Card title="Login">
+            <Card title="Dataset">
                 <Form
                     {...layout}
                     name="basic"
                     initialValues={ { remember: true }}
                     onFinish={handleFinish}
                 >
+                        <Form.Item
+                            label="Dataset"
+                            name="dataset"
+                            rules={[
+                                {
+                                required: true,
+                                message: '데이터셋을 입력하세요',
+                                },
+                            ]}
+                            hasFeedback
+                            // {...fieldErrors.label}
+                            {...fieldErrors.non_field_errors}
+                            >
+                            <Input />
+                        </Form.Item>
+
                         <Form.Item
                             label="Label"
                             name="label_name"
@@ -119,7 +140,7 @@ export default function PostNewForm(){
                             hasFeedback
                             {...fieldErrors.image}
                         >    
-                            <Upload 
+                            <Upload
                                 listType="picture-card" 
                                 fileList={fileList} 
                                 beforeUpload={()=>{
@@ -129,9 +150,7 @@ export default function PostNewForm(){
                                 onPreview={handlePreviewImage}>
                                 <div>
                                     <PlusOutlined />
-                                    <div className="ant-upload-text">Upload</div>
-
-                                    
+                                    <div className="ant-upload-text">Upload</div> 
                                 </div>    
                             </Upload> 
                         </Form.Item>
@@ -155,7 +174,6 @@ export default function PostNewForm(){
                             />
                         </Modal>
                         <hr/>
-                        {JSON.stringify(fileList)}
                 </Form> 
             </Card>
         </div>
