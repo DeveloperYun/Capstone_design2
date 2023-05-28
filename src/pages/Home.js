@@ -6,7 +6,7 @@ import "../css/Home.css";
 function Home() {
   const history = useNavigate();
 
-  const handleClick = () => {
+  const handleLabel = () => {
     history("/posts/new");
   };
 
@@ -45,7 +45,7 @@ function Home() {
               understand your results. Then play, improve, and export your
               model.
             </p>
-            <button onClick={handleClick}>나만의 모델 만들기</button>
+            <button onClick={handleLabel}>나만의 모델 만들기</button>
           </div>
           <div className="image">
             <img

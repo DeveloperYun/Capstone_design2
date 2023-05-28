@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import AccountRoutes from "./accounts";
 import PostNew from "./PostNew";
+import PostNewForm from "components/PostNewForm";
 
 function Root() {
   return (
