@@ -119,78 +119,86 @@ export default function PostNewForm() {
           </ul>
         </div>
       </header>
-      <Card class="Dataset">
+      <Card className="Dataset">
         <h2 class="h2-Labeling">Labeling</h2>
 
         <Form
           {...layout}
+          className="Total-form"
           name="basic"
           initialValues={{ remember: true }}
           onFinish={handleFinish}
         >
-          <Form.Item
-            label="Dataset"
-            name="dataset"
-            rules={[
-              {
-                required: true,
-                message: "데이터셋을 입력하세요",
-              },
-            ]}
-            hasFeedback
-            // {...fieldErrors.label}
-            {...fieldErrors.non_field_errors}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Label"
-            name="label_name"
-            rules={[
-              {
-                required: true,
-                message: "레이블을 입력하세요",
-              },
-            ]}
-            hasFeedback
-            {...fieldErrors.label}
-            {...fieldErrors.non_field_errors}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Images"
-            name="images"
-            rules={[
-              {
-                required: true,
-                message: "사진을 업로드하세요.",
-              },
-            ]}
-            hasFeedback
-            {...fieldErrors.image}
-          >
-            <Upload
-              listType="picture-card"
-              fileList={fileList}
-              multiple
-              beforeUpload={() => {
-                return false;
-              }}
-              onChange={handleUploadChange}
-              onPreview={handlePreviewImage}
+          <div class="DataLabel-form">
+            <Form.Item
+              className="Database-Form"
+              label="Dataset"
+              name="dataset"
+              rules={[
+                {
+                  required: true,
+                  message: "데이터셋을 입력하세요",
+                },
+              ]}
+              hasFeedback
+              // {...fieldErrors.label}
+              {...fieldErrors.non_field_errors}
             >
-              <div>
-                <PlusOutlined />
-                <div className="ant-upload-text">Upload</div>
-              </div>
-            </Upload>
-          </Form.Item>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Label"
+              name="label_name"
+              rules={[
+                {
+                  required: true,
+                  message: "레이블을 입력하세요",
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.label}
+              {...fieldErrors.non_field_errors}
+            >
+              <Input />
+            </Form.Item>
+          </div>
+
+          <div class="ImageUpload-form">
+            <p4>Images업로드</p4>
+            <Form.Item
+              className="Upload-form"
+              //   label="Images업로드"
+              name="images"
+              rules={[
+                {
+                  required: true,
+                  message: "사진을 업로드하세요.",
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.image}
+            >
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                multiple
+                beforeUpload={() => {
+                  return false;
+                }}
+                onChange={handleUploadChange}
+                onPreview={handlePreviewImage}
+              >
+                <div>
+                  <PlusOutlined className="PlusIcon" />
+                  {/* <div className="ant-upload-text">Upload</div> */}
+                </div>
+              </Upload>
+            </Form.Item>
+          </div>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button className="submit-button" type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

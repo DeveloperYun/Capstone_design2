@@ -118,6 +118,42 @@ ul {
 
 /*여기부터 Dataset*/
 .Dataset {
-  width: 768px;
+  width: 668px;
   margin: 20px auto;
+}
+
+.DataLabel-form {
+  display: flex;
+}
+
+.ImageUpload-form {
+  margin: 30px 0px 30px 0px;
+}
+
+.Upload-form {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 100px;
+  /* height: 100px; */
+}
+
+.PlusIcon {
+  width: 100px;
+  line-height: 100px;
+  border: 2px solid rgb(21, 236, 247);
+  /* border-radius: 150px; */
+  /* backdrop-filter: blur(3px); */
+}
+
+.submit-button {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #6c63ff;
 }
