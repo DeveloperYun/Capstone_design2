@@ -22,11 +22,9 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class LabelSerializer(serializers.ModelSerializer):
-
     def get_images(self, obj):
         image = obj.image.all() 
         return PostSerializer(instance=image, many=True, context=self.context).data
-
 
     class Meta:
         model = Label
@@ -35,7 +33,8 @@ class LabelSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         instance = Label.objects.create(**validated_data)
         image_set = self.context['request'].FILES
+        dataset = self.context['request'].data.get('dataset')
         for image_data in image_set.getlist('image'):
-            Post.objects.create(label=instance,author=self.context['request'].user, image=image_data)
+            Post.objects.create(label=instance,author=self.context['request'].user,dataset=dataset, image=image_data)
         return instance 
 

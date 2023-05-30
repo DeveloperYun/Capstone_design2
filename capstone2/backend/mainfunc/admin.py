@@ -14,7 +14,7 @@ class LabelAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["id", "author", "label_name", "image"]
+    list_display = ["id", "author", "dataset", "label_name", "image"]
 
     def label_name(self, obj):
         return obj.label.label_name
