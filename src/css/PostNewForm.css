@@ -118,7 +118,7 @@ ul {
 
 /*여기부터 Dataset*/
 .Dataset {
-  width: 668px;
+  width: 700px;
   margin: 20px auto;
 }
 
@@ -131,12 +131,16 @@ ul {
 }
 
 .Upload-form {
+  /* display: inline-flex; */
   /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  width: 100px;
+  justify-content: center; */
+  /* align-items: center; */
+  width: 200px;
   /* height: 100px; */
 }
+/* .please {
+  display: flex;
+} */
 
 .PlusIcon {
   width: 100px;

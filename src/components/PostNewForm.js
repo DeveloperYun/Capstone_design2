@@ -115,7 +115,7 @@ export default function PostNewForm() {
             <li>Work</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            <li onClick={handleLogin}>Log Out</li>
           </ul>
         </div>
       </header>
@@ -164,8 +164,9 @@ export default function PostNewForm() {
             </Form.Item>
           </div>
 
+          {/* 여기가 사진 업로드 하는 곳*************************** */}
           <div class="ImageUpload-form">
-            <p4>Images업로드</p4>
+            <p>Images업로드</p>
             <Form.Item
               className="Upload-form"
               //   label="Images업로드"
@@ -179,21 +180,25 @@ export default function PostNewForm() {
               hasFeedback
               {...fieldErrors.image}
             >
-              <Upload
-                listType="picture-card"
-                fileList={fileList}
-                multiple
-                beforeUpload={() => {
-                  return false;
-                }}
-                onChange={handleUploadChange}
-                onPreview={handlePreviewImage}
-              >
-                <div>
+              <div class="please">
+                <Upload
+                  className="Upload-form2222222222"
+                  listType="picture-card"
+                  fileList={fileList}
+                  multiple
+                  beforeUpload={() => {
+                    return false;
+                  }}
+                  onChange={handleUploadChange}
+                  onPreview={handlePreviewImage}
+                >
+                  {/* <div class="Upload-form22222"> */}
+                  <br />
                   <PlusOutlined className="PlusIcon" />
                   {/* <div className="ant-upload-text">Upload</div> */}
-                </div>
-              </Upload>
+                  {/* </div> */}
+                </Upload>
+              </div>
             </Form.Item>
           </div>
 

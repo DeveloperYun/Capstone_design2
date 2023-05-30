@@ -1,25 +1,24 @@
 import React from "react";
 import AppLayout from "components/AppLayout";
 import { Route, Routes } from "react-router-dom";
-// import About from "./About";
-// import Main from "./not_Home";
+import About from "./About";
 import Home from "./Home";
 import AccountRoutes from "./accounts";
 import PostNew from "./PostNew";
-import PostNewForm from "components/PostNewForm";
+import Train from "./train";
 
-function Root() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/home" element={<Main />} /> */}
-        {/* <Route path="/about" element={<About />} /> */}
-        <Route path="/posts/new" element={<PostNew />} />
-        <Route path="/accounts/*" element={<AccountRoutes />} />
-      </Routes>
-    </>
-  );
+function Root(){
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/train" element={<Train />}/>
+                <Route path="/about" element={<About />}/>
+                <Route path="/posts/new" element={<PostNew />}/>
+                <Route path="/accounts/*" element={<AccountRoutes />} />
+            </Routes>
+        </>
+    );
 }
 
 export default Root;

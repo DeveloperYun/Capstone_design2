@@ -4,35 +4,33 @@ import AppLayout from "components/AppLayout";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
-function not_Home() {
-  const history = useNavigate();
+function Home(){
+    const history = useNavigate();
 
-  const handleClick = () => {
-    history("/posts/new");
-  };
+    const handleClick = () => {
+        history("/posts/new");
+    }
 
-  const handleSignUp = () => {
-    history("/accounts/signup");
-  };
-
-  const handleLogin = () => {
-    history("/accounts/login");
-  };
-
-  return (
-    <AppLayout>
-      <Button type="primary" onClick={handleClick}>
-        데이터 셋 준비
-      </Button>
-      <Button type="secondary" onClick={handleSignUp}>
-        Sign Up
-      </Button>
-      <Button type="secondary" onClick={handleLogin}>
-        Log In
-      </Button>
-      <PostList />
-    </AppLayout>
-  );
+    const handleSignUp = () => {
+        history("/accounts/signup");
+    };
+    
+    const handleLogin = () => {
+        history("/accounts/login");
+    };
+    
+    return (
+        <AppLayout>
+            <Button type="primary" onClick={handleClick}>데이터 셋 준비</Button>
+            <Button type="secondary" onClick={handleSignUp}>
+                Sign Up
+            </Button>
+            <Button type="secondary" onClick={handleLogin}>
+                Log In
+            </Button>
+            <PostList />
+        </AppLayout>
+    );
 }
 
-export default not_Home;
+export default Home;

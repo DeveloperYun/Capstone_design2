@@ -81,31 +81,56 @@ export default function Signup() {
     </div> */}
 
           {/* <!-- Login Form --> */}
-          <form>
-            <input
-              type="text"
-              id="username"
-              class="fadeIn second"
-              name="signup"
-              placeholder="user name"
-            />
-            <input
-              type="text"
-              id="password"
-              class="fadeIn third"
-              name="signup"
-              placeholder="password"
-            />
-            <input
-              type="text"
-              id="Re-enter password"
-              class="fadeIn third"
-              name="signup"
-              placeholder="Re-enter password"
-            />
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+          >
+            <Form.Item
+              className="fadeInLogin SignUpForm"
+              //   label="Username"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "5글자 이상 입력하세요",
+                  min: 5,
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.username}
+            >
+              <input class="SignUpInputForm" placeholder="user name" />
+              {/* <Input /> */}
+            </Form.Item>
 
-            <input type="submit" class="fadeIn fourth" value="Log In" />
-          </form>
+            <Form.Item
+              className="fadeInLogin SignUpForm"
+              //   label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+              {...fieldErrors.password}
+            >
+              <input class="SignUpInputForm" placeholder="password" />
+              {/* <Input.Password /> */}
+            </Form.Item>
+
+            <Form.Item {...tailLayout}>
+              <button
+                class="fadeIn signupSubmit"
+                type="primary"
+                htmlType="submit"
+              >
+                Sign Up
+              </button>
+            </Form.Item>
+          </Form>
 
           {/* <!-- Remind Passowrd --> */}
           <div id="formFooter">
@@ -116,56 +141,14 @@ export default function Signup() {
         </div>
       </div>
     </div>
-    // <Form
-    //   {...layout}
-    //   name="basic"
-    //   initialValues={{ remember: true }}
-    //   onFinish={onFinish}
-    // >
-    //   <Form.Item
-    //     label="Username"
-    //     name="username"
-    //     rules={[
-    //       {
-    //         required: true,
-    //         message: "5글자 이상 입력하세요",
-    //         min: 5,
-    //       },
-    //     ]}
-    //     hasFeedback
-    //     {...fieldErrors.username}
-    //   >
-    //     <Input />
-    //   </Form.Item>
-
-    //   <Form.Item
-    //     label="Password"
-    //     name="password"
-    //     rules={[
-    //       {
-    //         required: true,
-    //         message: "Please input your password!",
-    //       },
-    //     ]}
-    //     {...fieldErrors.password}
-    //   >
-    //     <Input.Password />
-    //   </Form.Item>
-
-    //   <Form.Item {...tailLayout}>
-    //     <Button type="primary" htmlType="submit">
-    //       Submit
-    //     </Button>
-    //   </Form.Item>
-    // </Form>
   );
 }
 
-// const layout = {
-//   labelCol: { span: 8 },
-//   wrapperCol: { span: 16 },
-// };
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
-// const tailLayout = {
-//   wrapperCol: { offset: 8, span: 16 },
-// };
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};

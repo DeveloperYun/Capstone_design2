@@ -1,14 +1,17 @@
-import React from "react";
-import { Button } from "antd";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/Home.css";
+import "./Home.css";
+import Axios from "axios";
+import { useAppContext } from "store";
 
 function Home() {
+  const [dataset, setDataset] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const history = useNavigate();
 
-  const handleLabel = () => {
-    history("/posts/new");
-  };
+  const {
+    store: { jwtToken, username },
+  } = useAppContext();
 
   const handleSignUp = () => {
     history("/accounts/signup");
@@ -16,6 +19,45 @@ function Home() {
 
   const handleLogin = () => {
     history("/accounts/login");
+  };
+
+  const handleFunc = () => {
+    history("/posts/new");
+  };
+
+  const handleTrain = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDatasetChange = (event) => {
+    setDataset(event.target.value);
+  };
+
+  const handleTrainSubmit = () => {
+    const data = {
+      username: username,
+      dataset: dataset,
+    };
+
+    console.log(">> ", data);
+    Axios.post("http://localhost:8000/train/", data, {
+      headers: {
+        Authorization: `JWT ${jwtToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setIsModalOpen(false);
+        history("/train");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -26,9 +68,8 @@ function Home() {
             Your <b>Website</b>
           </a>
           <ul className="links">
-            <li>Home</li>
+            <li href="#">Home</li>
             <li>About Us</li>
-            <li>Work</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
             <li onClick={handleLogin}>Log In</li>
@@ -45,7 +86,8 @@ function Home() {
               understand your results. Then play, improve, and export your
               model.
             </p>
-            <button onClick={handleLabel}>나만의 모델 만들기</button>
+            <button onClick={handleFunc}>라벨링</button>
+            <button onClick={handleTrain}>학습하기</button>
           </div>
           <div className="image">
             <img
@@ -55,6 +97,23 @@ function Home() {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>학습시킬 데이터 셋을 입력하세요</h2>
+            <input
+              type="text"
+              value={dataset}
+              onChange={handleDatasetChange}
+              placeholder="Enter dataset"
+            />
+            <div className="modal-buttons">
+              <button onClick={handleTrainSubmit}>Submit</button>
+              <button onClick={handleModalClose}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

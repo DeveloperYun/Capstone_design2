@@ -31,7 +31,7 @@ export default function Login() {
           data: { token: jwtToken },
         } = response;
 
-        dispatch(setToken(jwtToken));
+        dispatch(setToken({ jwtToken, username }));
         //setJwtToken(jwtToken);
         notification.open({
           message: "로그인 성공",
@@ -78,92 +78,79 @@ export default function Login() {
   return (
     <div class="login fadeInDownLogin">
       <div id="formContentLogin">
-        {/* <!-- Tabs Titles --> */}
-        <h2 class="activeLogin"> LOGIN </h2>
-        <h2 class="inactiveSignup underlineHoverLogin" onClick={handleSignUp}>
-          Sign Up{" "}
-        </h2>
-        {/* <!-- Icon --> */}
-        {/* <div class="fadeInLogin first">
+        <Card>
+          {/* <!-- Tabs Titles --> */}
+          <h2 class="activeLogin"> LOGIN </h2>
+          <h2 class="inactiveSignup underlineHoverLogin" onClick={handleSignUp}>
+            Sign Up
+          </h2>
+          {/* <!-- Icon --> */}
+          {/* <div class="fadeInLogin first">
         <img
           src="http://danielzawadzki.com/codepen/01/icon.svg"
           id="icon"
           alt="User Icon"
         />
       </div> */}
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+          >
+            <Form.Item
+              className="fadeInLogin idPasswordForm"
+              //   label="Username"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "5글자 이상 입력하세요",
+                  min: 5,
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.username}
+              {...fieldErrors.non_field_errors}
+            >
+              <input class="InputForm" placeholder="user name" />
+              {/* <Input /> */}
+            </Form.Item>
 
-        {/* <!-- Login Form --> */}
-        <form>
-          <input
-            type="text"
-            id="login"
-            class="fadeInLogin second"
-            name="login"
-            placeholder="login"
-          />
-          <input
-            type="text"
-            id="password"
-            class="fadeInLogin third"
-            name="login"
-            placeholder="password"
-          />
-          <input type="submit" class="fadeInLogin fourth" value="Log In" />
-        </form>
+            <Form.Item
+              className="fadeInLogin idPasswordForm"
+              //   label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+              {...fieldErrors.password}
+            >
+              {/* <Input.Password /> */}
+              <input class="InputForm" placeholder="password" />
+            </Form.Item>
 
-        {/* <!-- Remind Passowrd --> */}
-        <div id="formFooterLogin">
-          <a class="underlineHoverLogin" href="#" onClick={handleHome}>
-            Home
-          </a>
-        </div>
+            <Form.Item className="LoginButton" {...tailLayout}>
+              <button
+                className="fadeInLogin loginSubmit"
+                type="primary"
+                htmlType="submit"
+              >
+                Log In
+              </button>
+            </Form.Item>
+          </Form>
+          <div id="formFooterLogin">
+            <a class="underlineHoverLogin" href="#" onClick={handleHome}>
+              Home
+            </a>
+          </div>
+        </Card>
       </div>
     </div>
-    // <Card className="login" title="Login">
-    //   <Form
-    //     {...layout}
-    //     name="basic"
-    //     initialValues={{ remember: true }}
-    //     onFinish={onFinish}
-    //   >
-    //     <Form.Item
-    //       label="Username"
-    //       name="username"
-    //       rules={[
-    //         {
-    //           required: true,
-    //           message: "5글자 이상 입력하세요",
-    //           min: 5,
-    //         },
-    //       ]}
-    //       hasFeedback
-    //       {...fieldErrors.username}
-    //       {...fieldErrors.non_field_errors}
-    //     >
-    //       <Input />
-    //     </Form.Item>
-
-    //     <Form.Item
-    //       label="Password"
-    //       name="password"
-    //       rules={[
-    //         {
-    //           required: true,
-    //           message: "Please input your password!",
-    //         },
-    //       ]}
-    //       {...fieldErrors.password}
-    //     >
-    //       <Input.Password />
-    //     </Form.Item>
-
-    //     <Form.Item {...tailLayout}>
-    //       <Button type="primary" htmlType="submit">
-    //         Submit
-    //       </Button>
-    //     </Form.Item>
-    //   </Form>
-    // </Card>
   );
 }
 
