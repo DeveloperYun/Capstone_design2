@@ -43,7 +43,7 @@ function Home() {
       dataset: dataset,
     };
 
-    console.log(">> ", data);
+    console.log(">> ",data)
     Axios.post("http://localhost:8000/train/", data, {
       headers: {
         Authorization: `JWT ${jwtToken}`,
@@ -79,21 +79,16 @@ function Home() {
       <div className="content">
         <div className="container">
           <div className="info">
-            <h1>Label, Train, Feedback</h1>
+            <h1>Looking For Inspiration</h1>
             <p>
-              L.T.F simplifies the process of machine learning into three easy
-              steps. Collect and label your images. Train your model and
-              understand your results. Then play, improve, and export your
-              model.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus odit nihil ullam nesciunt quidem
+              iste, Repellendus odit nihil
             </p>
-            <button onClick={handleFunc}>라벨링</button>
+            <button onClick={handleFunc}>나만의 모델 만들기</button>
             <button onClick={handleTrain}>학습하기</button>
           </div>
           <div className="image">
-            <img
-              src="https://i.postimg.cc/65QxYYzh/001234.png"
-              alt="Landing Page Image"
-            />
+            <img src="https://i.postimg.cc/65QxYYzh/001234.png" alt="Landing Page Image" />
           </div>
         </div>
       </div>
@@ -101,12 +96,7 @@ function Home() {
         <div className="modal">
           <div className="modal-content">
             <h2>학습시킬 데이터 셋을 입력하세요</h2>
-            <input
-              type="text"
-              value={dataset}
-              onChange={handleDatasetChange}
-              placeholder="Enter dataset"
-            />
+            <input type="text" value={dataset} onChange={handleDatasetChange} placeholder="Enter dataset" />
             <div className="modal-buttons">
               <button onClick={handleTrainSubmit}>Submit</button>
               <button onClick={handleModalClose}>Cancel</button>

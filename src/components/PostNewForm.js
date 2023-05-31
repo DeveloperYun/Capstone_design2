@@ -103,7 +103,7 @@ export default function PostNewForm() {
   };
 
   return (
-    <div class="PostNewForm-page">
+    <div className="PostNewForm-page">
       <header>
         <div className="container">
           <a href="#" className="logo">
@@ -115,74 +115,70 @@ export default function PostNewForm() {
             <li>Work</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log Out</li>
+            <li onClick={handleLogin}>Log In</li>
           </ul>
         </div>
       </header>
-      <h2 class="h2-Labeling">Labeling</h2>
 
-      <Form
-        {...layout}
-        className="Total-form"
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={handleFinish}
-      >
-        {/* 여기가 데이터셋 라벨 지정하는 곳*************************** */}
-        <div class="DataLabel-form">
-          <Form.Item
-            className="Database-Form"
-            label="Dataset"
-            name="dataset"
-            rules={[
-              {
-                required: true,
-                message: "데이터셋을 입력하세요",
-              },
-            ]}
-            hasFeedback
-            // {...fieldErrors.label}
-            {...fieldErrors.non_field_errors}
-          >
-            <Input />
-          </Form.Item>
+        <h2 className="h2-Labeling">Labeling</h2>
+        <Form
+          {...layout}
+          className="Total-form"
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={handleFinish}
+        >
+          <div className="DataLabel-form">
+            <Form.Item
+              className="Database-Form"
+              label="Dataset"
+              name="dataset"
+              rules={[
+                {
+                  required: true,
+                  message: "데이터셋을 입력하세요",
+                },
+              ]}
+              hasFeedback
+              // {...fieldErrors.label}
+              {...fieldErrors.non_field_errors}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            label="Label"
-            name="label_name"
-            rules={[
-              {
-                required: true,
-                message: "레이블을 입력하세요",
-              },
-            ]}
-            hasFeedback
-            {...fieldErrors.label}
-            {...fieldErrors.non_field_errors}
-          >
-            <Input />
-          </Form.Item>
-        </div>
+            <Form.Item
+              label="Label"
+              name="label_name"
+              rules={[
+                {
+                  required: true,
+                  message: "레이블을 입력하세요",
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.label}
+              {...fieldErrors.non_field_errors}
+            >
+              <Input />
+            </Form.Item>
+          </div>
 
-        {/* 여기가 사진 업로드 하는 곳*************************** */}
-        <div class="ImageUpload-form">
-          <p>Images업로드</p>
-          <Form.Item
-            className="Upload-form11111111111"
-            //   label="Images업로드"
-            name="images"
-            rules={[
-              {
-                required: true,
-                message: "사진을 업로드하세요.",
-              },
-            ]}
-            hasFeedback
-            {...fieldErrors.image}
-          >
-            <div class="please211111111111111111111111">
+          <div className="ImageUpload-form">
+            <p>Images업로드</p>
+            <Form.Item
+              className="Upload-form"
+              //   label="Images업로드"
+              name="images"
+              rules={[
+                {
+                  required: true,
+                  message: "사진을 업로드하세요.",
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.image}
+            >
               <Upload
-                className="Upload-form2222222222"
                 listType="picture-card"
                 fileList={fileList}
                 multiple
@@ -192,35 +188,33 @@ export default function PostNewForm() {
                 onChange={handleUploadChange}
                 onPreview={handlePreviewImage}
               >
-                {/* <div class="Upload-form22222"> */}
-                <br />
-                <PlusOutlined className="PlusIcon" />
-                {/* <div className="ant-upload-text">Upload</div> */}
-                {/* </div> */}
+                <div>
+                  <PlusOutlined className="PlusIcon" />
+                  {/* <div className="ant-upload-text">Upload</div> */}
+                </div>
               </Upload>
-            </div>
+            </Form.Item>
+          </div>
+
+          <Form.Item {...tailLayout}>
+            <Button className="submit-button" type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Form.Item>
-        </div>
 
-        <Form.Item className="submitForm" {...tailLayout}>
-          <button class="submit-button" type="primary" htmlType="submit">
-            Submit
-          </button>
-        </Form.Item>
-
-        <Modal
-          visible={previewImage.visible}
-          footer={null}
-          onCancel={() => setPreviewImage({ visible: false })}
-        >
-          <img
-            src={previewImage.base64}
-            style={{ width: "100%" }}
-            alt="preview"
-          />
-        </Modal>
-        <hr />
-      </Form>
+          <Modal
+            visible={previewImage.visible}
+            footer={null}
+            onCancel={() => setPreviewImage({ visible: false })}
+          >
+            <img
+              src={previewImage.base64}
+              style={{ width: "100%" }}
+              alt="preview"
+            />
+          </Modal>
+          <hr />
+        </Form>
     </div>
   );
 }

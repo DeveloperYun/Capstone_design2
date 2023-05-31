@@ -78,75 +78,77 @@ export default function Login() {
   return (
     <div class="login fadeInDownLogin">
       <div id="formContentLogin">
-        {/* <!-- Tabs Titles --> */}
-        <h2 class="activeLogin"> LOGIN </h2>
-        <h2 class="inactiveSignup underlineHoverLogin" onClick={handleSignUp}>
-          Sign Up
-        </h2>
-        {/* <!-- Icon --> */}
-        {/* <div class="fadeInLogin first">
+        <Card>
+          {/* <!-- Tabs Titles --> */}
+          <h2 class="activeLogin"> LOGIN </h2>
+          <h2 class="inactiveSignup underlineHoverLogin" onClick={handleSignUp}>
+            Sign Up
+          </h2>
+          {/* <!-- Icon --> */}
+          {/* <div class="fadeInLogin first">
         <img
           src="http://danielzawadzki.com/codepen/01/icon.svg"
           id="icon"
           alt="User Icon"
         />
       </div> */}
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-        >
-          <Form.Item
-            className="fadeInLogin idPasswordForm"
-            //   label="Username"
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: "5글자 이상 입력하세요",
-                min: 5,
-              },
-            ]}
-            hasFeedback
-            {...fieldErrors.username}
-            {...fieldErrors.non_field_errors}
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
           >
-            <input class="InputForm" placeholder="user name" />
-            {/* <Input /> */}
-          </Form.Item>
-
-          <Form.Item
-            className="fadeInLogin idPasswordForm"
-            //   label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-            {...fieldErrors.password}
-          >
-            {/* <Input.Password /> */}
-            <input class="InputForm" placeholder="password" />
-          </Form.Item>
-
-          <Form.Item className="LoginButton" {...tailLayout}>
-            <button
-              className="fadeInLogin loginSubmit"
-              type="primary"
-              htmlType="submit"
+            <Form.Item
+              className="fadeInLogin idPasswordForm"
+              //   label="Username"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "5글자 이상 입력하세요",
+                  min: 5,
+                },
+              ]}
+              hasFeedback
+              {...fieldErrors.username}
+              {...fieldErrors.non_field_errors}
             >
-              Log In
-            </button>
-          </Form.Item>
-        </Form>
-        <div id="formFooterLogin">
-          <a class="underlineHoverLogin" href="#" onClick={handleHome}>
-            Home
-          </a>
-        </div>
+              <input class="InputForm" placeholder="user name" />
+              {/* <Input /> */}
+            </Form.Item>
+
+            <Form.Item
+              className="fadeInLogin idPasswordForm"
+              //   label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+              {...fieldErrors.password}
+            >
+              {/* <Input.Password /> */}
+              <input class="InputForm" placeholder="password" />
+            </Form.Item>
+
+            <Form.Item className="LoginButton" {...tailLayout}>
+              <button
+                className="fadeInLogin loginSubmit"
+                type="primary"
+                htmlType="submit"
+              >
+                Log In
+              </button>
+            </Form.Item>
+          </Form>
+          <div id="formFooterLogin">
+            <a class="underlineHoverLogin" href="#" onClick={handleHome}>
+              Home
+            </a>
+          </div>
+        </Card>
       </div>
     </div>
   );
