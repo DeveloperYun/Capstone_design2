@@ -136,28 +136,17 @@ ul {
 
 .ImageUpload-form {
   margin: 30px 0px 30px 0px;
-  width: 1100px;
+  /* width: 1000px; */
 }
 
-.Upload-form11111111111 {
+.Upload-form .UploadClass {
   /* display: inline-flex; */
   /* display: flex;
   justify-content: center; */
   /* align-items: center; */
-  /* width: 700px; */
+  width: 700px;
   /* height: 100px; */
 }
-/* .please {
-  display: flex;
-} */
-
-.please211111111111111111111111 {
-  width: 700px;
-}
-
-/* .Upload-form2222222222 {
-  width: 700px;
-} */
 
 .PlusIcon {
   width: 100px;
