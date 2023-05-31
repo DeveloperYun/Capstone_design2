@@ -119,109 +119,108 @@ export default function PostNewForm() {
           </ul>
         </div>
       </header>
-      <Card className="Dataset">
-        <h2 class="h2-Labeling">Labeling</h2>
+      <h2 class="h2-Labeling">Labeling</h2>
 
-        <Form
-          {...layout}
-          className="Total-form"
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={handleFinish}
-        >
-          <div class="DataLabel-form">
-            <Form.Item
-              className="Database-Form"
-              label="Dataset"
-              name="dataset"
-              rules={[
-                {
-                  required: true,
-                  message: "데이터셋을 입력하세요",
-                },
-              ]}
-              hasFeedback
-              // {...fieldErrors.label}
-              {...fieldErrors.non_field_errors}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Label"
-              name="label_name"
-              rules={[
-                {
-                  required: true,
-                  message: "레이블을 입력하세요",
-                },
-              ]}
-              hasFeedback
-              {...fieldErrors.label}
-              {...fieldErrors.non_field_errors}
-            >
-              <Input />
-            </Form.Item>
-          </div>
-
-          {/* 여기가 사진 업로드 하는 곳*************************** */}
-          <div class="ImageUpload-form">
-            <p>Images업로드</p>
-            <Form.Item
-              className="Upload-form"
-              //   label="Images업로드"
-              name="images"
-              rules={[
-                {
-                  required: true,
-                  message: "사진을 업로드하세요.",
-                },
-              ]}
-              hasFeedback
-              {...fieldErrors.image}
-            >
-              <div class="please">
-                <Upload
-                  className="Upload-form2222222222"
-                  listType="picture-card"
-                  fileList={fileList}
-                  multiple
-                  beforeUpload={() => {
-                    return false;
-                  }}
-                  onChange={handleUploadChange}
-                  onPreview={handlePreviewImage}
-                >
-                  {/* <div class="Upload-form22222"> */}
-                  <br />
-                  <PlusOutlined className="PlusIcon" />
-                  {/* <div className="ant-upload-text">Upload</div> */}
-                  {/* </div> */}
-                </Upload>
-              </div>
-            </Form.Item>
-          </div>
-
-          <Form.Item {...tailLayout}>
-            <Button className="submit-button" type="primary" htmlType="submit">
-              Submit
-            </Button>
+      <Form
+        {...layout}
+        className="Total-form"
+        name="basic"
+        initialValues={{ remember: true }}
+        onFinish={handleFinish}
+      >
+        {/* 여기가 데이터셋 라벨 지정하는 곳*************************** */}
+        <div class="DataLabel-form">
+          <Form.Item
+            className="Database-Form"
+            label="Dataset"
+            name="dataset"
+            rules={[
+              {
+                required: true,
+                message: "데이터셋을 입력하세요",
+              },
+            ]}
+            hasFeedback
+            // {...fieldErrors.label}
+            {...fieldErrors.non_field_errors}
+          >
+            <Input />
           </Form.Item>
 
-          <Modal
-            visible={previewImage.visible}
-            footer={null}
-            onCancel={() => setPreviewImage({ visible: false })}
+          <Form.Item
+            label="Label"
+            name="label_name"
+            rules={[
+              {
+                required: true,
+                message: "레이블을 입력하세요",
+              },
+            ]}
+            hasFeedback
+            {...fieldErrors.label}
+            {...fieldErrors.non_field_errors}
           >
-            <img
-              src={previewImage.base64}
-              style={{ width: "100%" }}
-              alt="preview"
-            />
-          </Modal>
-          <hr />
-        </Form>
-      </Card>
+            <Input />
+          </Form.Item>
+        </div>
+
+        {/* 여기가 사진 업로드 하는 곳*************************** */}
+        <div class="ImageUpload-form">
+          <p>Images업로드</p>
+          <Form.Item
+            className="Upload-form11111111111"
+            //   label="Images업로드"
+            name="images"
+            rules={[
+              {
+                required: true,
+                message: "사진을 업로드하세요.",
+              },
+            ]}
+            hasFeedback
+            {...fieldErrors.image}
+          >
+            <div class="please211111111111111111111111">
+              <Upload
+                className="Upload-form2222222222"
+                listType="picture-card"
+                fileList={fileList}
+                multiple
+                beforeUpload={() => {
+                  return false;
+                }}
+                onChange={handleUploadChange}
+                onPreview={handlePreviewImage}
+              >
+                {/* <div class="Upload-form22222"> */}
+                <br />
+                <PlusOutlined className="PlusIcon" />
+                {/* <div className="ant-upload-text">Upload</div> */}
+                {/* </div> */}
+              </Upload>
+            </div>
+          </Form.Item>
+        </div>
+
+        <Form.Item className="submitForm" {...tailLayout}>
+          <button class="submit-button" type="primary" htmlType="submit">
+            Submit
+          </button>
+        </Form.Item>
+
+        <Modal
+          visible={previewImage.visible}
+          footer={null}
+          onCancel={() => setPreviewImage({ visible: false })}
+        >
+          <img
+            src={previewImage.base64}
+            style={{ width: "100%" }}
+            alt="preview"
+          />
+        </Modal>
+        <hr />
+      </Form>
     </div>
   );
 }

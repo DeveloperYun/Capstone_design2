@@ -26,6 +26,7 @@ body {
     #d65db1
   );
   height: 100%;
+  /* background-size: cover; */
 }
 /* .landing-page {
   font-family: "Poppins", sans-serif;
@@ -165,6 +166,7 @@ ul {
   border-radius: 20px;
   padding: 12px 30px;
   margin-top: 30px;
+  margin-right: 10px;
   cursor: pointer;
   color: #fff;
   background-color: #6c63ff;
