@@ -84,7 +84,7 @@ function Home() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus odit nihil ullam nesciunt quidem
               iste, Repellendus odit nihil
             </p>
-            <button onClick={handleFunc}>바로가기</button>
+            <button onClick={handleFunc}>나만의 모델 만들기</button>
             <button onClick={handleTrain}>학습하기</button>
           </div>
           <div className="image">
