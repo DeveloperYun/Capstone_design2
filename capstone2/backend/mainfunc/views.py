@@ -19,6 +19,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import random_split
 from PIL import Image
+import numpy as np
 import random
 
 # CRUD가 모두 들어간 API를 지원
@@ -49,14 +50,15 @@ class PostViewSet(ModelViewSet):
         serializer.save(author=self.request.user)
         return super().perform_create(serializer)
     
+#TODO: model 사용 부분 #########################################################
+
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 @method_decorator(csrf_exempt)
 def train_model(request):
-    #TODO: model 사용 부분 #########################################################
     print("==================> train 시작 ")
-
+    labels = []
     def binary_acc(y_pred, y_test):
         y_pred_tag = torch.round(torch.sigmoid(y_pred))
         print(y_pred_tag)
@@ -79,11 +81,15 @@ def train_model(request):
     media_root = settings.MEDIA_ROOT
     folder_path = os.path.join(media_root, user_name, datasets)
     print("================================================")
+    subfolders = [name for name in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, name))]
     print("학습데이터 경로>> ",folder_path)
+    print(subfolders)  # 하위 폴더 이름 출력
     print("================================================")
-    folder_path_test = 'C:/Users/yhb38/Desktop/Capstone2/capstone/Capstone_design2/capstone2/backend/temp_test_folder/apple'
+    #FIXME: folder_path_test = 'C:/Users/yhb38/Desktop/Capstone2/capstone/Capstone_design2/capstone2/backend/temp_test_folder/apple'
+    labels = subfolders
+    print(">> : ",labels)
+    classes = np.array(labels)
 
-            
     transform = transforms.Compose([
         transforms.Resize((256, 256)),
         transforms.ToTensor(), 
@@ -105,7 +111,7 @@ def train_model(request):
     train_data, val_data = torch.utils.data.random_split(dataset, [train_size, val_size])
 
     # 테스트용 dataset
-    test_data = torchvision.datasets.ImageFolder(root = folder_path_test, transform = transform)
+    #FIXME: test_data = torchvision.datasets.ImageFolder(root = folder_path_test, transform = transform)
 
 
     # num_workers : 데이터 로드에 사용할 하위 프로세스 수
@@ -113,18 +119,11 @@ def train_model(request):
 
     validationloader = DataLoader(val_data, batch_size=batch_size*2, shuffle=False, num_workers=2)
 
-    testloader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=2)
-
-
-    classes = ('car', 'flower')
+    #FIXME: testloader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=2)
 
     ## loss function의 train_loss 와 validation_loss
     loss_train = []
     loss_validation = []
-
-    ## train & validation accuracy 
-    train_acc_list = []
-    val_acc_list = []
 
     # 모델가져오기
     model = torchvision.models.mobilenet_v2(pretrained=True)
@@ -178,16 +177,9 @@ def train_model(request):
             running_loss += loss.item()
             running_acc += acc.item()
 
-            # # training accuracy 계산
-            # _, predicted = torch.max(outputs.data, 1)
-            # total_predictions += labels.size(0)
-            # correct_predictions += (predicted == labels).sum().item()
-
             if i % n == n-1:
                 print(f'Training : [{epoch + 1}, {i + 1:5d}] loss: {running_loss / n:.3f} accuracy: {running_acc / n:.3f}')
                 loss_train.append(running_loss / n)
-                # train data 정확도 기록하는 부분
-                # train_acc_list.append(correct_predictions / total_predictions)
                 running_loss = 0.0
                 running_acc = 0.0
         
@@ -204,21 +196,18 @@ def train_model(request):
                 loss = criterion(outputs, labels.float())
                 acc = binary_acc(outputs, labels.float())
 
-                # # validation accuracy 계산
-                # _, predicted = torch.max(outputs.data, 1)
-                # total_predictions += labels.size(0)
-                # correct_predictions += (predicted == labels).sum().item()
-                
                 # 통계를 출력
                 running_loss += loss.item()
                 running_acc += acc.item()
                 if i % m == m-1:
                     print(f'Validation : [{epoch + 1}, {i + 1:5d}] loss: {running_loss / m:.3f} accuracy: {running_acc / m:.3f}')
                     loss_validation.append(running_loss / m)
-                    # validation data 정확도 기록하는 부분
-                    # val_acc_list.append(correct_predictions / total_predictions)
                     running_loss = 0.0
                     running_acc = 0.0
+        # 5 epoch 마다 진행률 표시
+        if (epoch+1) % 5 == 0:
+            progress = ((epoch+1) / 30) * 100
+            print(f'Progressing : {progress:.2f}%')
 
     print('Finished Training\n')
 

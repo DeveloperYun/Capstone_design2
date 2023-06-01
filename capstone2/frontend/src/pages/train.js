@@ -38,12 +38,7 @@ function Train() {
       <div className="content">
         <div className="container">
           <div className="info">
-            <h1>Looking For Inspiration</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus odit nihil ullam nesciunt quidem
-              iste, Repellendus odit nihil
-            </p>
-            <button onClick={handleFunc}>바로가기</button>
+            
           </div>
           <div className="image">
           </div>
