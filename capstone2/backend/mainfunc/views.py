@@ -55,6 +55,8 @@ class PostViewSet(ModelViewSet):
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+classes = []
+
 @method_decorator(csrf_exempt)
 def train_model(request):
     print("==================> train 시작 ")
@@ -217,3 +219,88 @@ def train_model(request):
     
     return JsonResponse({'message': '모델 학습이 완료되었습니다.'})
 
+#TODO: 결과 확인하기 구현
+@method_decorator(csrf_exempt)
+def show_result(request):
+    #FIXME: 결과확인용 이미지 (db모델에는 저장x)
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    if request.method == 'POST':
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+        image = request.FILES.get('image')
+        username = request.POST.get('username')
+        username = username.strip('"')
+
+        print("임시확인 : ",username,image)
+
+        media_root = settings.MEDIA_ROOT
+        file_path = os.path.join(media_root, username, 'temp','temp')
+        print(">> ", file_path)
+
+        # 폴더 생성
+        os.makedirs(file_path, exist_ok=True)
+
+        # 기존 파일 삭제
+        for filename in os.listdir(file_path):
+            file = os.path.join(file_path, filename)
+            if os.path.isfile(file):
+                os.remove(file)
+
+        image_path = os.path.join(file_path, image.name)
+        with open(image_path, 'wb') as f:
+            for chunk in image.chunks():
+                f.write(chunk)
+
+        print("===============>test 시작")
+        file_path = os.path.join(media_root, username, 'temp')
+        folder_path_test = file_path
+        
+        transform = transforms.Compose([
+            transforms.Resize((256, 256)),
+            transforms.ToTensor(), 
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+            ])
+
+        epochs = 30
+        # 각 미니 배치에 16개의 샘플이 포함됨
+        batch_size = 32
+        test_data = torchvision.datasets.ImageFolder(root = folder_path_test, transform = transform)
+        testloader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=2)
+
+        # 모델 가져오기 및 수정
+        model = torchvision.models.mobilenet_v2(pretrained=True)
+        num_features = model.classifier[1].in_features
+        model.classifier[1] = nn.Linear(num_features, 1)  # 출력 유닛을 1개로 수정
+
+        # CUDA 장치 사용 여부 확인
+        device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        print(device)
+        model.to(device)
+
+        # 저장된 모델 불러오기
+        model.load_state_dict(torch.load('temp_model.pth'))
+        print("===============> model 가져오기 완료")
+
+        # 모델 테스트
+        label_list = []
+        y_test = []
+
+        model.eval()
+        with torch.no_grad():
+            for images, labels in testloader:
+                images = images.to(device)
+                label_pred = model(images)
+                label_pred = torch.sigmoid(label_pred)
+                label_tag = torch.round(label_pred)
+                label_list.append(label_tag.cpu().numpy())
+                y_test.append(labels.cpu().numpy())
+
+        y_test = [a.squeeze().tolist() for a in y_test]
+        label_list = [a.squeeze().tolist() for a in label_list]
+
+        classes=['bonobono','doraemon']
+        print(classes)
+        for i in range(len(test_data)):
+            print(classes[int(label_list[i])])
+
+        print("========> Finished Testing\n")

@@ -9,4 +9,5 @@ router.register('post', views.PostViewSet) # 2개의 url패턴 생성
 urlpatterns = [
     path('api/', include(router.urls)),
     path('train/', views.train_model),  # Add a new URL pattern for training
+    path('result/', views.show_result),
 ]
