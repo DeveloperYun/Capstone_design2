@@ -2,11 +2,12 @@ import json
 from django.conf import settings
 from rest_framework.viewsets import ModelViewSet
 from .serializers import PostSerializer, LabelSerializer
-from .models import Post
+from .models import Post, Model
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
 import os 
 from django.http import JsonResponse
+import time, math
 
 # model 사용을 위함
 import torch
@@ -20,7 +21,8 @@ import torch.optim as optim
 from torch.utils.data import random_split
 from PIL import Image
 import numpy as np
-import random
+from django.core.files import File
+from django.contrib.auth import get_user_model
 
 # CRUD가 모두 들어간 API를 지원
 class PostViewSet(ModelViewSet):
@@ -151,6 +153,9 @@ def train_model(request):
     n = len(trainloader)
     m = len(validationloader)
 
+    #학습시간 측정 시작
+    start_time = time.time()
+
     for epoch in range(epochs):   # 데이터셋을 수차례 반복합니다.
         running_loss = 0.0
         running_acc = 0.0
@@ -211,17 +216,33 @@ def train_model(request):
             progress = ((epoch+1) / 30) * 100
             print(f'Progressing : {progress:.2f}%')
 
+    end_time = time.time()
+    training_time = round(end_time-start_time,2)
+    print("학습시간 : ", training_time)
+    #print("학습정확도 : ",running_acc)
     print('Finished Training\n')
 
     # # 학습한 모델 저장
-    PATH = './temp_model.pth'
+    PATH = os.path.join(media_root, user_name, f"{datasets}.pth")
     torch.save(model.state_dict(), PATH)
+
+    UserModel = get_user_model()
+    user_instance = UserModel.objects.get(username=user_name)
+
+    model_instance = Model()
+    model_instance.author = user_instance  # 모델의 작성자 설정 (사용자 인증이 적용되어 있다고 가정)
+    model_instance.name = datasets  # 모델 이름 설정
+    model_instance.learning_time = training_time  # 학습 시간 설정
+    model_instance.accuracy = '100%'  # 정확도 설정
+    model_instance.file.save(f'{datasets}.pth', File(open(PATH, 'rb')))  # 모델 파일 저장
+    model_instance.save()  # 모델 인스턴스를 데이터베이스에 저장
     
-    return JsonResponse({'message': '모델 학습이 완료되었습니다.'})
+    return JsonResponse({'message': '모델 학습이 완료되었습니다.', 'training_time': training_time})
 
 #TODO: 결과 확인하기 구현
 @method_decorator(csrf_exempt)
 def show_result(request):
+
     #FIXME: 결과확인용 이미지 (db모델에는 저장x)
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     if request.method == 'POST':
@@ -279,7 +300,8 @@ def show_result(request):
         model.to(device)
 
         # 저장된 모델 불러오기
-        model.load_state_dict(torch.load('temp_model.pth'))
+        PATH = os.path.join(media_root, username, f"{dataset}.pth")
+        model.load_state_dict(torch.load(PATH))
         print("===============> model 가져오기 완료")
 
         # 모델 테스트
