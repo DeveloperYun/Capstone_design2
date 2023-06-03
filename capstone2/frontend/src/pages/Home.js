@@ -54,6 +54,8 @@ function Home() {
         console.log(response.data);
         setIsModalOpen(false);
         history("/train");
+        localStorage.setItem("dataset", dataset);
+
       })
       .catch((error) => {
         console.error(error);
