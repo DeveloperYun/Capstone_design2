@@ -306,14 +306,16 @@ def show_result(request):
         classes = label_folders
 
         print(classes)
+    
         for i in range(len(test_data)):
-            print(classes[int(label_list[i])])
-
+            # print(classes[int(label_list[i])])
+            res = classes[int(label_list[i])]
+        print("결과 : ",res)
         print("========> Finished Testing\n")
 
          # 예시로 JsonResponse로 응답을 반환합니다.
         response_data = {
-            'message': 'Success',
+            'message': res,
             'username': username,
             'image': image.name,
         }

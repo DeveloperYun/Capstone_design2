@@ -13,6 +13,7 @@ function Train() {
   const [selectedImage, setSelectedImage] = useState(null); // 선택된 이미지 상태 추가
   const [username, setUsername] = useState(""); // 유저명 상태 추가
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
+  const [resultMessage, setResultMessage] = useState(""); // Add result message state
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -53,6 +54,8 @@ function Train() {
       Axios.post("http://localhost:8000/result/", formData,{headers})
       .then(response => {
         console.log("success response:", response);
+        setResultMessage(response.data.message);
+
       })
       .catch(error => {
         console.log("error:", error);
@@ -86,6 +89,14 @@ function Train() {
           <div className="image"></div>
         </div>
       </div>
+
+      {resultMessage && (
+        <div className="result-message">
+          <h2>Result</h2>
+          <p>{resultMessage}</p>
+        </div>
+      )}
+
     </div>
   );
 }
