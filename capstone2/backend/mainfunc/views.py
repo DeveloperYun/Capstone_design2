@@ -229,9 +229,10 @@ def show_result(request):
 
         image = request.FILES.get('image')
         username = request.POST.get('username')
+        dataset = request.POST.get('dataset')
         username = username.strip('"')
 
-        print("임시확인 : ",username,image)
+        print("임시확인 : ",username,image,dataset)
 
         media_root = settings.MEDIA_ROOT
         file_path = os.path.join(media_root, username, 'temp','temp')
@@ -298,9 +299,23 @@ def show_result(request):
         y_test = [a.squeeze().tolist() for a in y_test]
         label_list = [a.squeeze().tolist() for a in label_list]
 
-        classes=['bonobono','doraemon']
+
+        dataset_path = os.path.join(media_root, username, dataset)
+        label_folders = os.listdir(dataset_path)
+
+        classes = label_folders
+
         print(classes)
         for i in range(len(test_data)):
             print(classes[int(label_list[i])])
 
         print("========> Finished Testing\n")
+
+         # 예시로 JsonResponse로 응답을 반환합니다.
+        response_data = {
+            'message': 'Success',
+            'username': username,
+            'image': image.name,
+        }
+
+        return JsonResponse(response_data)
