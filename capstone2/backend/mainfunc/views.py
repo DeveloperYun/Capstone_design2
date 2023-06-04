@@ -252,7 +252,7 @@ def train_model(request):
     model_instance.author = user_instance  # 모델의 작성자 설정 (사용자 인증이 적용되어 있다고 가정)
     model_instance.name = datasets  # 모델 이름 설정
     model_instance.learning_time = training_time  # 학습 시간 설정
-    model_instance.accuracy = '100%'  # 정확도 설정
+    model_instance.accuracy = accuracy_training  # 정확도 설정
     model_instance.file.save(f'{datasets}.pth', File(open(PATH, 'rb')))  # 모델 파일 저장
     model_instance.save()  # 모델 인스턴스를 데이터베이스에 저장
     
