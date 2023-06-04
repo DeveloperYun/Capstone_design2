@@ -8,6 +8,8 @@ function Home() {
   const [dataset, setDataset] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loginState, setLoginState] = useState(localStorage.username);
+  const [loading, setLoading] = useState(false);
+
   const history = useNavigate();
   useEffect(() => {
     // console.log(localStorage.username, username, loginState, "성공");
@@ -36,6 +38,7 @@ function Home() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setLoading(false);
   };
 
   const handleDatasetChange = (event) => {
@@ -49,6 +52,7 @@ function Home() {
     };
 
     console.log(">> ", data);
+    setLoading(true);
     Axios.post("http://localhost:8000/train/", data, {
       headers: {
         Authorization: `JWT ${jwtToken}`,
@@ -121,6 +125,10 @@ function Home() {
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
+            {/* 로딩 */}
+            {loading && <h2 class="loading">Loading...</h2>}
+
+            <br />
             <h2>학습시킬 데이터 셋을 입력하세요</h2>
             <input
               type="text"
