@@ -11,6 +11,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   const history = useNavigate();
+  // console.log(localStorage, loginState, localStorage.username);
   useEffect(() => {
     // console.log(localStorage.username, username, loginState, "성공");
     setLoginState(username);
@@ -129,6 +130,9 @@ function Home() {
             {/* {loading && <h2 class="loading">Loading...</h2>} */}
             {loading && (
               <img
+                // src="https://i.postimg.cc/PrfTKpBL/bihanggi.gif"
+                // width="350px"
+                // height="170px"
                 src="https://i.postimg.cc/0jWH0T0W/Loading.gif"
                 // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
                 width="70px"

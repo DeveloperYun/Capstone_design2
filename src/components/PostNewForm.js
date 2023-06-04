@@ -94,6 +94,12 @@ export default function PostNewForm() {
   const handleHome = () => {
     history("/");
   };
+  const handleLogOut = () => {
+    localStorage.removeItem("username");
+    // loginCheck();
+    // alert("로그아웃 되었습니다!");
+    history("/");
+  };
   const handleSignUp = () => {
     history("../accounts/signup");
   };
@@ -115,7 +121,7 @@ export default function PostNewForm() {
             <li>Work</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            <li onClick={handleLogOut}>Log Out</li>
           </ul>
         </div>
       </header>
@@ -189,7 +195,7 @@ export default function PostNewForm() {
               onChange={handleUploadChange}
               onPreview={handlePreviewImage}
             >
-              <div>
+              <div class="PlusIconDiv">
                 <PlusOutlined className="PlusIcon" />
                 {/* <div className="ant-upload-text">Upload</div> */}
               </div>
@@ -198,9 +204,9 @@ export default function PostNewForm() {
         </div>
 
         <Form.Item {...tailLayout}>
-          <Button className="submit-button" type="primary" htmlType="submit">
+          <button className="submit-button" type="primary" htmlType="submit">
             Submit
-          </Button>
+          </button>
         </Form.Item>
 
         <Modal

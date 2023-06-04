@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Axios from "axios";
 import { useAppContext } from "store";
+import "../css/train.css";
 
 function Train() {
   const {
@@ -29,6 +30,17 @@ function Train() {
     }
   }, []);
 
+  const handleHome = () => {
+    history("/");
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("username");
+    // loginCheck();
+    // alert("로그아웃 되었습니다!");
+    history("/");
+  };
+
   const handleSignUp = () => {
     history("/accounts/signup");
   };
@@ -51,15 +63,14 @@ function Train() {
       formData.append("username", username);
       formData.append("dataset", dataset);
 
-      Axios.post("http://localhost:8000/result/", formData,{headers})
-      .then(response => {
-        console.log("success response:", response);
-        setResultMessage(response.data.message);
-
-      })
-      .catch(error => {
-        console.log("error:", error);
-      });
+      Axios.post("http://localhost:8000/result/", formData, { headers })
+        .then((response) => {
+          console.log("success response:", response);
+          setResultMessage(response.data.message);
+        })
+        .catch((error) => {
+          console.log("error:", error);
+        });
     }
   };
 
@@ -68,14 +79,14 @@ function Train() {
       <header>
         <div className="container">
           <a href="#" className="logo">
-            Your <b>Website</b>
+            Your <b onClick={handleHome}>Website</b>
           </a>
           <ul className="links">
             <li href="#">Home</li>
             <li>About Us</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            <li onClick={handleHome}>Log Out</li>
           </ul>
         </div>
       </header>
@@ -96,7 +107,6 @@ function Train() {
           <p>{resultMessage}</p>
         </div>
       )}
-
     </div>
   );
 }
