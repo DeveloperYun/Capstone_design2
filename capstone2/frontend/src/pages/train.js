@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Axios from "axios";
 import { useAppContext } from "store";
+import "../css/train.css";
 
 function Train() {
   const {
@@ -14,6 +15,7 @@ function Train() {
   const [username, setUsername] = useState(""); // 유저명 상태 추가
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
+  const [loginState, setLoginState] = useState(localStorage.username);
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -29,17 +31,49 @@ function Train() {
     }
   }, []);
 
+  const handleHome = () => {
+    history("/");
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("username");
+    // loginCheck();
+    // alert("로그아웃 되었습니다!");
+    history("/");
+  };
+
   const handleSignUp = () => {
     history("/accounts/signup");
   };
 
-  const handleLogin = () => {
-    history("/accounts/login");
+  const loginCheck = () => {
+    setLoginState(localStorage.username);
+  };
+
+  const logout = () => {
+    // localStorage.clear();
+    localStorage.removeItem("username");
+    loginCheck();
+    alert("로그아웃 되었습니다!");
+    history("/");
   };
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
+
+    // 파일리더 생성
+    var preview = new FileReader();
+    preview.onload = function (e) {
+      // img id 값
+      document.getElementById("user-image").src = e.target.result;
+    };
+    // input id 값
+    preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
+  };
+
+  const handleLogin = () => {
+    history("/accounts/login");
   };
 
   const handleResultView = () => {
@@ -51,43 +85,80 @@ function Train() {
       formData.append("username", username);
       formData.append("dataset", dataset);
 
-      Axios.post("http://localhost:8000/result/", formData,{headers})
-      .then(response => {
-        console.log("success response:", response);
-        setResultMessage(response.data.message);
-
-      })
-      .catch(error => {
-        console.log("error:", error);
-      });
+      Axios.post("http://localhost:8000/result/", formData, { headers })
+        .then((response) => {
+          console.log("success response:", response);
+          setResultMessage(response.data.message);
+        })
+        .catch((error) => {
+          console.log("error:", error);
+        });
     }
   };
 
   return (
-    <div className="landing-page">
+    // <div className="landing-page">
+    <div className="Result-page">
       <header>
         <div className="container">
-          <a href="#" className="logo">
-            Your <b>Website</b>
+          <a href="/" className="logo">
+            Nocode <b>AI platform</b>
           </a>
           <ul className="links">
-            <li href="#">Home</li>
-            <li>About Us</li>
-            <li>Info</li>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="https://github.com/DeveloperYun/Capstone_design2">About Us</a>
+            </li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            {loginState ? (
+              <li onClick={logout}>Log Out</li>
+            ) : (
+              <li onClick={handleLogin}>Log In</li>
+            )}
           </ul>
         </div>
       </header>
-      <div className="content">
-        <div className="container">
-          <div className="info">
-            {/* 이미지 업로드 input 추가 */}
-            <input type="file" onChange={handleImageUpload} />
-            <button onClick={handleResultView}>결과보기</button>
-          </div>
-          <div className="image"></div>
+
+      <h2 className="h2-Labeling">Result</h2>
+
+      <div className="ImageUpload-form-train">
+        <h1 class="test-h1">테스트 이미지 업로드</h1>
+
+        {/* 이미지 업로드 input 추가 */}
+
+        <div className="Image-Area">
+          <img
+            class="user-image"
+            id="user-image"
+            // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
+            // src="https://i.postimg.cc/6qJ3mjLB/icons-1151-256.gif"
+            // src="https://i.postimg.cc/FRFGJpJs/folder-1.png"
+            src="https://i.postimg.cc/7hdNdytf/folder.png"
+            alt=""
+          />
         </div>
+
+        <div className="File-Area">
+          <label class="file-label" for="chooseFile">
+            Choose File
+          </label>
+          <input
+            className="File-Area-Input"
+            id="chooseFile"
+            type="file"
+            onChange={handleImageUpload}
+            // onChange={PreviewImage}
+          />
+        </div>
+
+        <div className="result-Area">
+          <button className="result-button" onClick={handleResultView}>
+            결과보기
+          </button>
+        </div>
+        <div className="image"></div>
       </div>
 
       {resultMessage && (
@@ -96,7 +167,7 @@ function Train() {
           <p>{resultMessage}</p>
         </div>
       )}
-
+      <hr />
     </div>
   );
 }

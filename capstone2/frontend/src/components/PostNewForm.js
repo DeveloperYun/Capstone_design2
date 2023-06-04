@@ -11,17 +11,22 @@ import "../css/PostNewForm.css";
 
 export default function PostNewForm() {
   const {
-    store: { jwtToken },
+    store: { jwtToken, username },
   } = useAppContext();
 
   const history = useNavigate();
-
+  const [loginState, setLoginState] = useState(localStorage.username);
   const [fileList, setFileList] = useState([]);
   const [fieldErrors, setFieldErrors] = useState({});
   const [previewImage, setPreviewImage] = useState({
     visible: false,
     base64: null,
   });
+
+  useEffect(() => {
+    // console.log(localStorage.username, username, loginState, "성공");
+    setLoginState(username);
+  }, [localStorage]);
 
   const handleUploadChange = ({ fileList }) => {
     setFileList(fileList);
@@ -94,6 +99,12 @@ export default function PostNewForm() {
   const handleHome = () => {
     history("/");
   };
+  const handleLogOut = () => {
+    localStorage.removeItem("username");
+    // loginCheck();
+    // alert("로그아웃 되었습니다!");
+    history("/");
+  };
   const handleSignUp = () => {
     history("../accounts/signup");
   };
@@ -102,20 +113,38 @@ export default function PostNewForm() {
     history("../accounts/login");
   };
 
+  const loginCheck = () => {
+    setLoginState(localStorage.username);
+  };
+
+  const logout = () => {
+    // localStorage.clear();
+    localStorage.removeItem("username");
+    loginCheck();
+    alert("로그아웃 되었습니다!");
+    history("/");
+  };
+
   return (
     <div className="PostNewForm-page">
       <header>
         <div className="container">
-          <a href="#" className="logo">
-            Your <b onClick={handleHome}>Website</b>
+          <a href="/" className="logo">
+            Nocode <b>AI platform</b>
           </a>
           <ul className="links">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Work</li>
-            <li>Info</li>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="https://github.com/DeveloperYun/Capstone_design2">About Us</a>
+            </li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            {loginState ? (
+              <li onClick={logout}>Log Out</li>
+            ) : (
+              <li onClick={handleLogin}>Log In</li>
+            )}
           </ul>
         </div>
       </header>
@@ -189,7 +218,7 @@ export default function PostNewForm() {
               onChange={handleUploadChange}
               onPreview={handlePreviewImage}
             >
-              <div>
+              <div class="PlusIconDiv">
                 <PlusOutlined className="PlusIcon" />
                 {/* <div className="ant-upload-text">Upload</div> */}
               </div>
@@ -198,9 +227,9 @@ export default function PostNewForm() {
         </div>
 
         <Form.Item {...tailLayout}>
-          <Button className="submit-button" type="primary" htmlType="submit">
+          <button className="submit-button" type="primary" htmlType="submit">
             Submit
-          </Button>
+          </button>
         </Form.Item>
 
         <Modal
