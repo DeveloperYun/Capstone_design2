@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Axios from "axios";
@@ -7,7 +7,12 @@ import { useAppContext } from "store";
 function Home() {
   const [dataset, setDataset] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loginState, setLoginState] = useState(localStorage.username);
   const history = useNavigate();
+  useEffect(() => {
+    // console.log(localStorage.username, username, loginState, "성공");
+    setLoginState(username);
+  }, [localStorage]);
 
   const {
     store: { jwtToken, username },
@@ -55,11 +60,21 @@ function Home() {
         setIsModalOpen(false);
         history("/train");
         localStorage.setItem("dataset", dataset);
-
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const loginCheck = () => {
+    setLoginState(localStorage.username);
+  };
+
+  const logout = () => {
+    // localStorage.clear();
+    localStorage.removeItem("username");
+    loginCheck();
+    alert("로그아웃 되었습니다!");
   };
 
   return (
@@ -74,7 +89,11 @@ function Home() {
             <li>About Us</li>
             <li>Info</li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogin}>Log In</li>
+            {loginState ? (
+              <li onClick={logout}>Log Out</li>
+            ) : (
+              <li onClick={handleLogin}>Log In</li>
+            )}
           </ul>
         </div>
       </header>
