@@ -126,7 +126,15 @@ function Home() {
         <div className="modal">
           <div className="modal-content">
             {/* 로딩 */}
-            {loading && <h2 class="loading">Loading...</h2>}
+            {/* {loading && <h2 class="loading">Loading...</h2>} */}
+            {loading && (
+              <img
+                src="https://i.postimg.cc/0jWH0T0W/Loading.gif"
+                // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
+                width="70px"
+                height="70px"
+              />
+            )}
 
             <br />
             <h2>학습시킬 데이터 셋을 입력하세요</h2>
