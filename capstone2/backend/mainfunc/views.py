@@ -63,6 +63,11 @@ classes = []
 def train_model(request):
     print("==================> train 시작 ")
     labels = []
+    progress = 0.0
+    accuracy_training = 0.0
+    best_loss = 10**9
+    early_stop_limit = 3
+    early_stop_check = 0
     def binary_acc(y_pred, y_test):
         y_pred_tag = torch.round(torch.sigmoid(y_pred))
         print(y_pred_tag)
@@ -183,17 +188,17 @@ def train_model(request):
             # 통계를 출력
             running_loss += loss.item()
             running_acc += acc.item()
+            accuracy_training = round((running_acc / n), 2)
 
             if i % n == n-1:
-                print(f'Training : [{epoch + 1}, {i + 1:5d}] loss: {running_loss / n:.3f} accuracy: {running_acc / n:.3f}')
+                print(f'Training : [{epoch + 1}, {i + 1:5d}] loss: {running_loss / n:.3f} accuracy: {accuracy_training}')
                 loss_train.append(running_loss / n)
                 running_loss = 0.0
                 running_acc = 0.0
-        
-        with torch.no_grad():
-            # evaluation mode
-            model.eval()
 
+        # evaluation mode
+        model.eval()
+        with torch.no_grad():
             # Validation Phase
             for i, data in enumerate(validationloader, 0):
                 inputs, labels = data[0].to(device), data[1].to(device)
@@ -206,11 +211,25 @@ def train_model(request):
                 # 통계를 출력
                 running_loss += loss.item()
                 running_acc += acc.item()
+
+                # early stopping 여부 체크
+                if running_loss > best_loss:      # loss가 개선되지 않은 경우
+                    early_stop_check += 1
+
+                else:                             # loss가 개선된 경우
+                    best_loss = running_loss
+                    early_stop_check = 0
+
                 if i % m == m-1:
                     print(f'Validation : [{epoch + 1}, {i + 1:5d}] loss: {running_loss / m:.3f} accuracy: {running_acc / m:.3f}')
                     loss_validation.append(running_loss / m)
                     running_loss = 0.0
                     running_acc = 0.0
+
+        # early stopping 조건 만족 시 조기 종료
+        if early_stop_check >= early_stop_limit:
+            break
+
         # 5 epoch 마다 진행률 표시
         if (epoch+1) % 5 == 0:
             progress = ((epoch+1) / 30) * 100
@@ -219,7 +238,7 @@ def train_model(request):
     end_time = time.time()
     training_time = round(end_time-start_time,2)
     print("학습시간 : ", training_time)
-    #print("학습정확도 : ",running_acc)
+    print(f'Final Accuracy : {accuracy_training}%')
     print('Finished Training\n')
 
     # # 학습한 모델 저장
