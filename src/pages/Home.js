@@ -9,6 +9,7 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loginState, setLoginState] = useState(localStorage.username);
   const [loading, setLoading] = useState(false);
+  const [errorLoading, setErrorLoading] = useState(false);
 
   const history = useNavigate();
   // console.log(localStorage, loginState, localStorage.username);
@@ -43,6 +44,7 @@ function Home() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setErrorLoading(false);
     setLoading(false);
   };
 
@@ -57,7 +59,15 @@ function Home() {
     };
 
     console.log(">> ", data);
+    setErrorLoading(false);
     setLoading(true);
+
+    if (!dataset) {
+      console.log(dataset, localStorage.dataset);
+      setLoading(false);
+      return;
+    }
+
     Axios.post("http://localhost:8000/train/", data, {
       headers: {
         Authorization: `JWT ${jwtToken}`,
@@ -71,6 +81,9 @@ function Home() {
         localStorage.setItem("dataset", dataset);
       })
       .catch((error) => {
+        setLoading(false);
+        setErrorLoading(true);
+        //durldurl 데이터셋다시 입력하라고 쓰기
         console.error(error);
       });
   };
@@ -153,9 +166,15 @@ function Home() {
                 height="70px"
               />
             )}
+            {errorLoading && (
+              <h2>
+                데이터 셋을 잘못 입력했습니다. <br />
+                다시 입력해 주세요.
+              </h2>
+            )}
 
             <br />
-            <h2>학습시킬 데이터 셋을 입력하세요</h2>
+            <h2>학습시킬 데이터 셋을 입력하세요.</h2>
             <input
               type="text"
               value={dataset}
