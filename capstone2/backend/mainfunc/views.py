@@ -66,7 +66,7 @@ def train_model(request):
     progress = 0.0
     accuracy_training = 0.0
     best_loss = 10**9
-    early_stop_limit = 3
+    early_stop_limit = 10
     early_stop_check = 0
     def binary_acc(y_pred, y_test):
         y_pred_tag = torch.round(torch.sigmoid(y_pred))
@@ -362,3 +362,4 @@ def show_result(request):
         }
 
         return JsonResponse(response_data)
+    
