@@ -15,8 +15,9 @@ function Train() {
   const [username, setUsername] = useState(""); // 유저명 상태 추가
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
-  const [resacc, setResacc] = useState("")
+  const [resacc, setResacc] = useState("");
   const [imgSrc, setImgSrc] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -62,6 +63,7 @@ function Train() {
   };
 
   const handleResultView = () => {
+    setLoading(true);
     const headers = { Authorization: `JWT ${jwtToken}` };
 
     if (selectedImage && username) {
@@ -73,6 +75,7 @@ function Train() {
       Axios.post("http://localhost:8000/result/", formData, { headers })
         .then((response) => {
           console.log("success response:", response);
+          setLoading(false);
           setResultMessage(response.data.message);
           setResacc(response.data.acc);
         })
@@ -117,46 +120,57 @@ function Train() {
       </h2>
 
       {/* 파일 업로드 */}
+
       {resultMessage ? (
         // 결과반환
         <div className="result-message">
-          <h1 class="test-h1">{resacc}% 확률로 {resultMessage} 입니다!</h1>
+          <h1 class="test-h1">
+            {resacc}% 확률로 {resultMessage} 입니다!
+          </h1>
           <div className="Image-Area">
             <img class="user-image" id="user-image" src={imgSrc} alt="" />
           </div>
         </div>
       ) : (
-        // 파일 업로드
-        <div className="ImageUpload-form-train">
-          <h1 class="test-h1">테스트 이미지 업로드</h1>
+        <div>
+          {loading ? (
+            <div className="Loading-Area">
+              <h2 className="Loading">Loading...</h2>
+            </div>
+          ) : (
+            // 파일 업로드(메인화면)
+            <div className="ImageUpload-form-train">
+              <h1 class="test-h1">테스트 이미지 업로드</h1>
 
-          <div className="Image-Area">
-            <img
-              class="user-image"
-              id="user-image"
-              src="https://i.postimg.cc/7hdNdytf/folder.png"
-              alt=""
-            />
-          </div>
+              <div className="Image-Area">
+                <img
+                  class="user-image"
+                  id="user-image"
+                  src="https://i.postimg.cc/7hdNdytf/folder.png"
+                  alt=""
+                />
+              </div>
 
-          <div className="File-Area">
-            <label class="file-label" for="chooseFile">
-              Choose File
-            </label>
-            <input
-              className="File-Area-Input"
-              id="chooseFile"
-              type="file"
-              onChange={handleImageUpload}
-              // onChange={PreviewImage}
-            />
-          </div>
+              <div className="File-Area">
+                <label class="file-label" for="chooseFile">
+                  Choose File
+                </label>
+                <input
+                  className="File-Area-Input"
+                  id="chooseFile"
+                  type="file"
+                  onChange={handleImageUpload}
+                  // onChange={PreviewImage}
+                />
+              </div>
 
-          <div className="result-Area">
-            <button className="result-button" onClick={handleResultView}>
-              결과보기
-            </button>
-          </div>
+              <div className="result-Area">
+                <button className="result-button" onClick={handleResultView}>
+                  결과보기
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
