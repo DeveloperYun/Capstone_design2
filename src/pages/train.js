@@ -96,15 +96,13 @@ function Train() {
     <div className="Result-page">
       <header>
         <div className="container">
-          <a href="/" className="logo">
-            Nocode <b>AI platform</b>
+          <a className="logo">
+            Nocode <b onClick={handleHome}>AI platform</b>
           </a>
           <ul className="links">
-            <li>
-              <a href="/" style={{ color: "black" }}>
-                Home
-              </a>
-            </li>
+            {/* <li onClick={handleHome} style={{ color: "black" }}>
+              Home
+            </li> */}
             <li>
               <a
                 href="https://github.com/DeveloperYun/Capstone_design2"
