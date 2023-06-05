@@ -326,17 +326,22 @@ def show_result(request):
         # 모델 테스트
         label_list = []
         y_test = []
+        y_acc = []
 
         model.eval()
         with torch.no_grad():
-            for images, labels in testloader:
+            for images, label in testloader:
                 images = images.to(device)
                 label_pred = model(images)
                 label_pred = torch.sigmoid(label_pred)
+                y_acc.append(label_pred.cpu().numpy())
+
                 label_tag = torch.round(label_pred)
                 label_list.append(label_tag.cpu().numpy())
-                y_test.append(labels.cpu().numpy())
+                y_test.append(label.cpu().numpy())
 
+        
+        y_acc = [a.squeeze().tolist() for a in y_acc]
         y_test = [a.squeeze().tolist() for a in y_test]
         label_list = [a.squeeze().tolist() for a in label_list]
 
@@ -347,11 +352,24 @@ def show_result(request):
         classes = label_folders
 
         print(classes)
-    
         for i in range(len(test_data)):
             # print(classes[int(label_list[i])])
             res = classes[int(label_list[i])]
+
+        
+        res_acc = 0
+        # 레이블이름과 예측정확률 출력
+        for i in range(len(test_data)):
+            if y_acc[i] < 0.5:
+                y_acc[i] = round((1 - y_acc[i]), 2)
+            else :
+                y_acc[i] = round(y_acc[i], 2)
+            print("예측정확도 >>", y_acc[i]*100)
+            res_acc=y_acc[i]*100
+            print(classes[int(label_list[i])])
+
         print("결과 : ",res)
+        print("예측정확도 : ", res_acc)
         print("========> Finished Testing\n")
 
          # 예시로 JsonResponse로 응답을 반환합니다.
@@ -359,6 +377,7 @@ def show_result(request):
             'message': res,
             'username': username,
             'image': image.name,
+            'acc': res_acc,
         }
 
         return JsonResponse(response_data)
