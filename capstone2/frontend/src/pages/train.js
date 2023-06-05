@@ -15,6 +15,7 @@ function Train() {
   const [username, setUsername] = useState(""); // 유저명 상태 추가
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
+  const [imgSrc, setImgSrc] = useState("");
   const [loginState, setLoginState] = useState(localStorage.username);
 
   useEffect(() => {
@@ -45,7 +46,6 @@ function Train() {
   const handleSignUp = () => {
     history("/accounts/signup");
   };
-
   const loginCheck = () => {
     setLoginState(localStorage.username);
   };
@@ -58,6 +58,10 @@ function Train() {
     history("/");
   };
 
+  const handleLogin = () => {
+    history("/accounts/login");
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
@@ -67,13 +71,10 @@ function Train() {
     preview.onload = function (e) {
       // img id 값
       document.getElementById("user-image").src = e.target.result;
+      setImgSrc(e.target.result);
     };
     // input id 값
     preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
-  };
-
-  const handleLogin = () => {
-    history("/accounts/login");
   };
 
   const handleResultView = () => {
@@ -121,52 +122,56 @@ function Train() {
         </div>
       </header>
 
-      <h2 className="h2-Labeling">Result</h2>
+      <h2 className="h2-Labeling">
+        <a href="/train" style={{ color: "black" }}>
+          Result
+        </a>
+      </h2>
 
-      <div className="ImageUpload-form-train">
-        <h1 class="test-h1">테스트 이미지 업로드</h1>
-
-        {/* 이미지 업로드 input 추가 */}
-
-        <div className="Image-Area">
-          <img
-            class="user-image"
-            id="user-image"
-            // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
-            // src="https://i.postimg.cc/6qJ3mjLB/icons-1151-256.gif"
-            // src="https://i.postimg.cc/FRFGJpJs/folder-1.png"
-            src="https://i.postimg.cc/7hdNdytf/folder.png"
-            alt=""
-          />
-        </div>
-
-        <div className="File-Area">
-          <label class="file-label" for="chooseFile">
-            Choose File
-          </label>
-          <input
-            className="File-Area-Input"
-            id="chooseFile"
-            type="file"
-            onChange={handleImageUpload}
-            // onChange={PreviewImage}
-          />
-        </div>
-
-        <div className="result-Area">
-          <button className="result-button" onClick={handleResultView}>
-            결과보기
-          </button>
-        </div>
-        <div className="image"></div>
-      </div>
-
-      {resultMessage && (
+      {/* 파일 업로드 */}
+      {resultMessage ? (
+        // 결과반환
         <div className="result-message">
-          <h2>Result</h2>
-          <p>{resultMessage}</p>
+          <h1 class="test-h1">{resultMessage} 입니다!</h1>
+          <div className="Image-Area">
+            <img class="user-image" id="user-image" src={imgSrc} alt="" />
+          </div>
+        </div>
+      ) : (
+        // 파일 업로드
+        <div className="ImageUpload-form-train">
+          <h1 class="test-h1">테스트 이미지 업로드</h1>
+
+          <div className="Image-Area">
+            <img
+              class="user-image"
+              id="user-image"
+              src="https://i.postimg.cc/7hdNdytf/folder.png"
+              alt=""
+            />
+          </div>
+
+          <div className="File-Area">
+            <label class="file-label" for="chooseFile">
+              Choose File
+            </label>
+            <input
+              className="File-Area-Input"
+              id="chooseFile"
+              type="file"
+              onChange={handleImageUpload}
+              // onChange={PreviewImage}
+            />
+          </div>
+
+          <div className="result-Area">
+            <button className="result-button" onClick={handleResultView}>
+              결과보기
+            </button>
+          </div>
         </div>
       )}
+
       <hr />
     </div>
   );
