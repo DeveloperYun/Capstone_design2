@@ -15,6 +15,7 @@ function Train() {
   const [username, setUsername] = useState(""); // 유저명 상태 추가
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
+  const [resacc, setResacc] = useState("");
   const [imgSrc, setImgSrc] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -39,17 +40,6 @@ function Train() {
   const handleSignUp = () => {
     history("/accounts/signup");
   };
-  // const loginCheck = () => {
-  //   setLoginState(localStorage.username);
-  // };
-
-  // const logout = () => {
-  //   // localStorage.clear();
-  //   localStorage.removeItem("username");
-  //   loginCheck();
-  //   alert("로그아웃 되었습니다!");
-  //   history("/");
-  // };
 
   const handleLogin = () => {
     history("/accounts/login");
@@ -87,6 +77,7 @@ function Train() {
           console.log("success response:", response);
           setLoading(false);
           setResultMessage(response.data.message);
+          setResacc(response.data.acc);
         })
         .catch((error) => {
           console.log("error:", error);
@@ -129,12 +120,13 @@ function Train() {
       </h2>
 
       {/* 파일 업로드 */}
-      {/* <h2 className="h2-Labeling">Loading...</h2> */}
 
       {resultMessage ? (
         // 결과반환
         <div className="result-message">
-          <h1 class="test-h1">{resultMessage} 입니다!</h1>
+          <h1 class="test-h1">
+            {resacc}% 확률로 {resultMessage} 입니다!
+          </h1>
           <div className="Image-Area">
             <img class="user-image" id="user-image" src={imgSrc} alt="" />
           </div>
