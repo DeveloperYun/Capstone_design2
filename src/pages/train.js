@@ -116,6 +116,7 @@ function Train() {
             <li>
               <a
                 href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
                 style={{ color: "black" }}
               >
                 About Us

@@ -91,10 +91,18 @@ function Home() {
           </a>
           <ul className="links">
             <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
+              <a href="/" style={{ color: "black" }}>
+                Home
+              </a>
             </li>
             <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
@@ -111,18 +119,17 @@ function Home() {
             <h1>Easy to A.I modeling</h1>
             <p>
               코딩을 몰라도, AI를 몰라도 손쉽게 머신러닝 모델링을 할 수 있는
-              저희의 플랫폼을 소개합니다.
-              두 번의 라벨링을 통해 정확한 이진분류가 가능한 모델을 경험해보세요
+              저희의 플랫폼을 소개합니다. 두 번의 라벨링을 통해 정확한
+              이진분류가 가능한 모델을 경험해보세요
             </p>
-            {!loginState && <p><br/>
-              로그인 후 이용하세요
-            </p>}
-            {loginState && (
-              <button onClick={handleFunc}>라벨링</button>
+            {!loginState && (
+              <p>
+                <br />
+                로그인 후 이용하세요
+              </p>
             )}
-            {loginState && (
-              <button onClick={handleTrain}>학습하기</button>
-            )}
+            {loginState && <button onClick={handleFunc}>라벨링</button>}
+            {loginState && <button onClick={handleTrain}>학습하기</button>}
           </div>
           <div className="image">
             <img

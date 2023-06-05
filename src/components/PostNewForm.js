@@ -134,10 +134,18 @@ export default function PostNewForm() {
           </a>
           <ul className="links">
             <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
+              <a href="/" style={{ color: "black" }}>
+                Home
+              </a>
             </li>
             <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
