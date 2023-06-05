@@ -16,7 +16,6 @@ function Train() {
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
   const [imgSrc, setImgSrc] = useState("");
-  const [loginState, setLoginState] = useState(localStorage.username);
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -36,45 +35,40 @@ function Train() {
     history("/");
   };
 
-  const handleLogOut = () => {
-    localStorage.removeItem("username");
-    // loginCheck();
-    // alert("로그아웃 되었습니다!");
-    history("/");
-  };
-
   const handleSignUp = () => {
     history("/accounts/signup");
   };
-  const loginCheck = () => {
-    setLoginState(localStorage.username);
-  };
+  // const loginCheck = () => {
+  //   setLoginState(localStorage.username);
+  // };
 
-  const logout = () => {
-    // localStorage.clear();
-    localStorage.removeItem("username");
-    loginCheck();
-    alert("로그아웃 되었습니다!");
-    history("/");
-  };
+  // const logout = () => {
+  //   // localStorage.clear();
+  //   localStorage.removeItem("username");
+  //   loginCheck();
+  //   alert("로그아웃 되었습니다!");
+  //   history("/");
+  // };
 
   const handleLogin = () => {
     history("/accounts/login");
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file);
+    if (event.target.files[0]) {
+      const file = event.target.files[0];
+      setSelectedImage(file);
 
-    // 파일리더 생성
-    var preview = new FileReader();
-    preview.onload = function (e) {
-      // img id 값
-      document.getElementById("user-image").src = e.target.result;
-      setImgSrc(e.target.result);
-    };
-    // input id 값
-    preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
+      // 파일리더 생성
+      var preview = new FileReader();
+      preview.onload = function (e) {
+        // img id 값
+        document.getElementById("user-image").src = e.target.result;
+        setImgSrc(e.target.result);
+      };
+      // input id 값
+      preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
+    }
   };
 
   const handleResultView = () => {
@@ -102,22 +96,25 @@ function Train() {
     <div className="Result-page">
       <header>
         <div className="container">
-          <a href="/" className="logo">
-            Nocode <b>AI platform</b>
+          <a className="logo">
+            Nocode <b onClick={handleHome}>AI platform</b>
           </a>
           <ul className="links">
+            {/* <li onClick={handleHome} style={{ color: "black" }}>
+              Home
+            </li> */}
             <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
-            </li>
-            <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
-            {loginState ? (
-              <li onClick={logout}>Log Out</li>
-            ) : (
-              <li onClick={handleLogin}>Log In</li>
-            )}
+
+            <li onClick={handleHome}>Home</li>
           </ul>
         </div>
       </header>

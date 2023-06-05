@@ -9,6 +9,7 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loginState, setLoginState] = useState(localStorage.username);
   const [loading, setLoading] = useState(false);
+  const [errorLoading, setErrorLoading] = useState(false);
 
   const history = useNavigate();
   // console.log(localStorage, loginState, localStorage.username);
@@ -20,6 +21,10 @@ function Home() {
   const {
     store: { jwtToken, username },
   } = useAppContext();
+
+  const handleHome = () => {
+    history("/");
+  };
 
   const handleSignUp = () => {
     history("/accounts/signup");
@@ -39,6 +44,7 @@ function Home() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setErrorLoading(false);
     setLoading(false);
   };
 
@@ -53,7 +59,15 @@ function Home() {
     };
 
     console.log(">> ", data);
+    setErrorLoading(false);
     setLoading(true);
+
+    if (!dataset) {
+      console.log(dataset, localStorage.dataset);
+      setLoading(false);
+      return;
+    }
+
     Axios.post("http://localhost:8000/train/", data, {
       headers: {
         Authorization: `JWT ${jwtToken}`,
@@ -67,6 +81,9 @@ function Home() {
         localStorage.setItem("dataset", dataset);
       })
       .catch((error) => {
+        setLoading(false);
+        setErrorLoading(true);
+        //durldurl 데이터셋다시 입력하라고 쓰기
         console.error(error);
       });
   };
@@ -86,15 +103,21 @@ function Home() {
     <div className="landing-page">
       <header>
         <div className="container">
-          <a href="/" className="logo">
-            Nocode <b>AI platform</b>
+          <a className="logo">
+            Nocode <b onClick={handleHome}>AI platform</b>
           </a>
           <ul className="links">
-            <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
+            <li onClick={handleHome} style={{ color: "black" }}>
+              Home
             </li>
             <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
@@ -111,18 +134,17 @@ function Home() {
             <h1>Easy to A.I modeling</h1>
             <p>
               코딩을 몰라도, AI를 몰라도 손쉽게 머신러닝 모델링을 할 수 있는
-              저희의 플랫폼을 소개합니다.
-              두 번의 라벨링을 통해 정확한 이진분류가 가능한 모델을 경험해보세요
+              저희의 플랫폼을 소개합니다. 두 번의 라벨링을 통해 정확한
+              이진분류가 가능한 모델을 경험해보세요
             </p>
-            {!loginState && <p><br/>
-              로그인 후 이용하세요
-            </p>}
-            {loginState && (
-              <button onClick={handleFunc}>라벨링</button>
+            {!loginState && (
+              <p>
+                <br />
+                로그인 후 이용하세요
+              </p>
             )}
-            {loginState && (
-              <button onClick={handleTrain}>학습하기</button>
-            )}
+            {loginState && <button onClick={handleFunc}>라벨링</button>}
+            {loginState && <button onClick={handleTrain}>학습하기</button>}
           </div>
           <div className="image">
             <img
@@ -144,9 +166,15 @@ function Home() {
                 height="70px"
               />
             )}
+            {errorLoading && (
+              <h2>
+                데이터 셋을 잘못 입력했습니다. <br />
+                다시 입력해 주세요.
+              </h2>
+            )}
 
             <br />
-            <h2>학습시킬 데이터 셋을 입력하세요</h2>
+            <h2>학습시킬 데이터 셋을 입력하세요.</h2>
             <input
               type="text"
               value={dataset}

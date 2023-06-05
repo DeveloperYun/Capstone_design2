@@ -99,12 +99,12 @@ export default function PostNewForm() {
   const handleHome = () => {
     history("/");
   };
-  const handleLogOut = () => {
-    localStorage.removeItem("username");
-    // loginCheck();
-    // alert("로그아웃 되었습니다!");
-    history("/");
-  };
+  // const handleLogOut = () => {
+  //   localStorage.removeItem("username");
+  //   // loginCheck();
+  //   // alert("로그아웃 되었습니다!");
+  //   history("/");
+  // };
   const handleSignUp = () => {
     history("../accounts/signup");
   };
@@ -113,35 +113,29 @@ export default function PostNewForm() {
     history("../accounts/login");
   };
 
-  const loginCheck = () => {
-    setLoginState(localStorage.username);
-  };
-
-  const logout = () => {
-    // localStorage.clear();
-    localStorage.removeItem("username");
-    loginCheck();
-    alert("로그아웃 되었습니다!");
-    history("/");
-  };
-
   return (
     <div className="PostNewForm-page">
       <header>
         <div className="container">
-          <a href="/" className="logo">
-            Nocode <b>AI platform</b>
+          <a className="logo">
+            Nocode <b onClick={handleHome}>AI platform</b>
           </a>
           <ul className="links">
+            {/* <li onClick={handleHome} style={{ color: "black" }}>
+              Home
+            </li> */}
             <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
-            </li>
-            <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                target="_blank"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
-              <li onClick={logout}>Log Out</li>
+              <li onClick={handleHome}>Home</li>
             ) : (
               <li onClick={handleLogin}>Log In</li>
             )}

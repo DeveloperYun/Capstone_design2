@@ -214,4 +214,15 @@ ul {
   margin-top: 20px;
 }
 
+.loading {
+  /* text-align: center;
+  font-weight: 600;
+ 
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #cccccc; */
+  font-size: 30px;
+  text-transform: none;
+}
+
 /* ... Existing styles ... */
