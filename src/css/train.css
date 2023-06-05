@@ -143,3 +143,26 @@
   color: #fff;
   background-color: #6c63ff;
 }
+
+.Loading-Area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+
+.Loading {
+  margin-bottom: 80px;
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: none;
+  display: inline-block;
+  color: #fff;
+}
+
+/* .Airplane-Area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+} */
