@@ -86,13 +86,16 @@ function Home() {
     <div className="landing-page">
       <header>
         <div className="container">
-          <a href="#" className="logo">
-            Your <b>Website</b>
+          <a href="/" className="logo">
+            Nocode <b>AI platform</b>
           </a>
           <ul className="links">
-            <li href="#">Home</li>
-            <li>About Us</li>
-            <li>Info</li>
+            <li>
+              <a href="/" style={{ color: "black" }}>Home</a>
+            </li>
+            <li>
+              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+            </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
               <li onClick={logout}>Log Out</li>
@@ -105,15 +108,21 @@ function Home() {
       <div className="content">
         <div className="container">
           <div className="info">
-            <h1>Label, Train, Feedback</h1>
+            <h1>Easy to A.I modeling</h1>
             <p>
-              L.T.F simplifies the process of machine learning into three easy
-              steps. Collect and label your images. Train your model and
-              understand your results. Then play, improve, and export your
-              model.
+              코딩을 몰라도, AI를 몰라도 손쉽게 머신러닝 모델링을 할 수 있는
+              저희의 플랫폼을 소개합니다.
+              두 번의 라벨링을 통해 정확한 이진분류가 가능한 모델을 경험해보세요
             </p>
-            <button onClick={handleFunc}>라벨링</button>
-            <button onClick={handleTrain}>학습하기</button>
+            {!loginState && <p><br/>
+              로그인 후 이용하세요
+            </p>}
+            {loginState && (
+              <button onClick={handleFunc}>라벨링</button>
+            )}
+            {loginState && (
+              <button onClick={handleTrain}>학습하기</button>
+            )}
           </div>
           <div className="image">
             <img
@@ -130,11 +139,7 @@ function Home() {
             {/* {loading && <h2 class="loading">Loading...</h2>} */}
             {loading && (
               <img
-                // src="https://i.postimg.cc/PrfTKpBL/bihanggi.gif"
-                // width="350px"
-                // height="170px"
                 src="https://i.postimg.cc/0jWH0T0W/Loading.gif"
-                // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
                 width="70px"
                 height="70px"
               />

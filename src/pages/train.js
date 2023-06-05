@@ -16,6 +16,7 @@ function Train() {
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
   const [imgSrc, setImgSrc] = useState("");
+  const [loginState, setLoginState] = useState(localStorage.username);
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -45,6 +46,21 @@ function Train() {
   const handleSignUp = () => {
     history("/accounts/signup");
   };
+  const loginCheck = () => {
+    setLoginState(localStorage.username);
+  };
+
+  const logout = () => {
+    // localStorage.clear();
+    localStorage.removeItem("username");
+    loginCheck();
+    alert("로그아웃 되었습니다!");
+    history("/");
+  };
+
+  const handleLogin = () => {
+    history("/accounts/login");
+  };
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -60,17 +76,6 @@ function Train() {
     // input id 값
     preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
   };
-
-  // const PreviewImage = () => {
-  //   // 파일리더 생성
-  //   var preview = new FileReader();
-  //   preview.onload = function (e) {
-  //     // img id 값
-  //     document.getElementById("user-image").src = e.target.result;
-  //   };
-  //   // input id 값
-  //   preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
-  // };
 
   const handleResultView = () => {
     const headers = { Authorization: `JWT ${jwtToken}` };
@@ -97,20 +102,31 @@ function Train() {
     <div className="Result-page">
       <header>
         <div className="container">
-          <a href="#" className="logo">
-            Your <b onClick={handleHome}>Website</b>
+          <a href="/" className="logo">
+            Nocode <b>AI platform</b>
           </a>
           <ul className="links">
-            <li href="#">Home</li>
-            <li>About Us</li>
-            <li>Info</li>
+            <li>
+              <a href="/" style={{ color: "black" }}>Home</a>
+            </li>
+            <li>
+              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+            </li>
             <li onClick={handleSignUp}>Sign Up</li>
-            <li onClick={handleLogOut}>Log Out</li>
+            {loginState ? (
+              <li onClick={logout}>Log Out</li>
+            ) : (
+              <li onClick={handleLogin}>Log In</li>
+            )}
           </ul>
         </div>
       </header>
 
-      <h2 className="h2-Labeling">Result</h2>
+      <h2 className="h2-Labeling">
+        <a href="/train" style={{ color: "black" }}>
+          Result
+        </a>
+      </h2>
 
       {/* 파일 업로드 */}
       {resultMessage ? (
@@ -130,9 +146,6 @@ function Train() {
             <img
               class="user-image"
               id="user-image"
-              // src="https://i.postimg.cc/Vst6HXrN/bono.gif"
-              // src="https://i.postimg.cc/6qJ3mjLB/icons-1151-256.gif"
-              // src="https://i.postimg.cc/FRFGJpJs/folder-1.png"
               src="https://i.postimg.cc/7hdNdytf/folder.png"
               alt=""
             />
@@ -158,16 +171,6 @@ function Train() {
           </div>
         </div>
       )}
-
-      {/* 결과 반환 */}
-      {/* {resultMessage && (
-        <div className="result-message">
-          <h1 class="test-h1">{resultMessage} 입니다!</h1>
-          <div className="Image-Area">
-            <img class="user-image" id="user-image" src={imgSrc} alt="" />
-          </div>
-        </div>
-      )} */}
 
       <hr />
     </div>
