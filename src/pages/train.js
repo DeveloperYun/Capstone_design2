@@ -63,18 +63,20 @@ function Train() {
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file);
+    if (event.target.files[0]) {
+      const file = event.target.files[0];
+      setSelectedImage(file);
 
-    // 파일리더 생성
-    var preview = new FileReader();
-    preview.onload = function (e) {
-      // img id 값
-      document.getElementById("user-image").src = e.target.result;
-      setImgSrc(e.target.result);
-    };
-    // input id 값
-    preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
+      // 파일리더 생성
+      var preview = new FileReader();
+      preview.onload = function (e) {
+        // img id 값
+        document.getElementById("user-image").src = e.target.result;
+        setImgSrc(e.target.result);
+      };
+      // input id 값
+      preview.readAsDataURL(document.getElementById("chooseFile").files[0]);
+    }
   };
 
   const handleResultView = () => {
@@ -107,10 +109,17 @@ function Train() {
           </a>
           <ul className="links">
             <li>
-              <a href="/" style={{ color: "black" }}>Home</a>
+              <a href="/" style={{ color: "black" }}>
+                Home
+              </a>
             </li>
             <li>
-              <a href="https://github.com/DeveloperYun/Capstone_design2" style={{ color: "black" }}>About Us</a>
+              <a
+                href="https://github.com/DeveloperYun/Capstone_design2"
+                style={{ color: "black" }}
+              >
+                About Us
+              </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
