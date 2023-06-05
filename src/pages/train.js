@@ -16,7 +16,6 @@ function Train() {
   const [dataset, setDataset] = useState(""); // 데이터셋 상태 추가
   const [resultMessage, setResultMessage] = useState(""); // Add result message state
   const [imgSrc, setImgSrc] = useState("");
-  const [loginState, setLoginState] = useState(localStorage.username);
 
   useEffect(() => {
     // 로컬 스토리지에서 유저명 가져오기
@@ -36,27 +35,20 @@ function Train() {
     history("/");
   };
 
-  const handleLogOut = () => {
-    localStorage.removeItem("username");
-    // loginCheck();
-    // alert("로그아웃 되었습니다!");
-    history("/");
-  };
-
   const handleSignUp = () => {
     history("/accounts/signup");
   };
-  const loginCheck = () => {
-    setLoginState(localStorage.username);
-  };
+  // const loginCheck = () => {
+  //   setLoginState(localStorage.username);
+  // };
 
-  const logout = () => {
-    // localStorage.clear();
-    localStorage.removeItem("username");
-    loginCheck();
-    alert("로그아웃 되었습니다!");
-    history("/");
-  };
+  // const logout = () => {
+  //   // localStorage.clear();
+  //   localStorage.removeItem("username");
+  //   loginCheck();
+  //   alert("로그아웃 되었습니다!");
+  //   history("/");
+  // };
 
   const handleLogin = () => {
     history("/accounts/login");
@@ -123,11 +115,8 @@ function Train() {
               </a>
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
-            {loginState ? (
-              <li onClick={logout}>Log Out</li>
-            ) : (
-              <li onClick={handleLogin}>Log In</li>
-            )}
+
+            <li onClick={handleHome}>Home</li>
           </ul>
         </div>
       </header>

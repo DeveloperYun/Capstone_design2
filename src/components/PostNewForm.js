@@ -99,30 +99,18 @@ export default function PostNewForm() {
   const handleHome = () => {
     history("/");
   };
-  const handleLogOut = () => {
-    localStorage.removeItem("username");
-    // loginCheck();
-    // alert("로그아웃 되었습니다!");
-    history("/");
-  };
+  // const handleLogOut = () => {
+  //   localStorage.removeItem("username");
+  //   // loginCheck();
+  //   // alert("로그아웃 되었습니다!");
+  //   history("/");
+  // };
   const handleSignUp = () => {
     history("../accounts/signup");
   };
 
   const handleLogin = () => {
     history("../accounts/login");
-  };
-
-  const loginCheck = () => {
-    setLoginState(localStorage.username);
-  };
-
-  const logout = () => {
-    // localStorage.clear();
-    localStorage.removeItem("username");
-    loginCheck();
-    alert("로그아웃 되었습니다!");
-    history("/");
   };
 
   return (
@@ -149,7 +137,7 @@ export default function PostNewForm() {
             </li>
             <li onClick={handleSignUp}>Sign Up</li>
             {loginState ? (
-              <li onClick={logout}>Log Out</li>
+              <li onClick={handleHome}>Home</li>
             ) : (
               <li onClick={handleLogin}>Log In</li>
             )}
