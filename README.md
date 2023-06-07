@@ -1,8 +1,11 @@
 # 종합설계프로젝트2 3팀
 ---
 ### 프로젝트 소개
-- 머신러닝 모델 개발을 위한 노코드(no-code) 플랫폼 개발 (주)데이터센트릭
-- 노션 : https://hexagonal-knot-7e4.notion.site/3-e433a2ca79764aac888870b857cb3d4b?pvs=4
+- 프로젝트명 : 머신러닝 모델 개발을 위한 노코드(no-code) 플랫폼 개발 
+- 멘토 기업 : (주)데이터센트릭
+- Notion : https://hexagonal-knot-7e4.notion.site/3-e433a2ca79764aac888870b857cb3d4b?pvs=4
+- 소개
+-- 
 
 ## 웹
 
