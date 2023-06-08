@@ -9,6 +9,12 @@
   
 
 ## 웹
+- 사용한 툴
+  - 개발 도구 : vscode, github, notion, conda 4.12.0, Colab
+  - 사용 언어 : Python 3.9, javascript, MySQL
+  - 사용 프레임워크 : Django 3.2.18 , React 18.2
+  - 핵심 라이브러리 : Pytorch 2.0.1 + cu118 
+
 - 시스템 구조도
 ![20230608_154929](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/a074085b-dd6e-41c0-a9e0-3c34a21b9d0b)
 
