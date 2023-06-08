@@ -9,6 +9,7 @@
   
 
 ## 웹
+![dd drawio](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/bd547d9b-5b66-42a8-981e-bfef7a0fe150)
 
 
 ## 모델
