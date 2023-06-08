@@ -43,7 +43,7 @@
 
 ---
 ### 회의록
-https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
+[노션] https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
 ---
 ### 데모 영상
 
