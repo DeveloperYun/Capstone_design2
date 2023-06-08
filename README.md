@@ -5,8 +5,7 @@
 - 멘토 기업 : (주)데이터센트릭
 - Notion : https://hexagonal-knot-7e4.notion.site/3-e433a2ca79764aac888870b857cb3d4b?pvs=4
 - 소개
-  - 코딩이나 인공지능에 대한 사전지식이 없어도 손 쉽게 정확한 이진분류가 가능한 인공지능 모델링을 빠른 시간에 결과를 볼 수 있는 노 코드 플랫폼 
-  
+  - 코딩이나 인공지능에 대한 사전지식이 없어도 손 쉽고 빠르게 정확한 이진분류가 가능한 인공지능 모델링을 해볼 수 있는 노 코드 플랫폼
 
 ## 웹
 - 사용한 툴
@@ -31,8 +30,8 @@
 
 ## 모델
 ---
-### 벤치마킹 결과 종합  
-
+### 벤치마킹 결과 종합  (https://hexagonal-knot-7e4.notion.site/5a48f5837603404b8feba8e6bc414c38?pvs=4) 
+![20230608_160428](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/ea986f7d-2744-43d5-91af-9028d7415171)
 세진 : https://github.com/sejin1129/BenchMarking  
 준수 : https://github.com/githeoheo/Pytorch-benchmarking.git  
 해빈 : https://github.com/DeveloperYun/Pytorch_benchmark  
@@ -44,7 +43,7 @@
 
 ---
 ### 회의록
-
+https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
 ---
 ### 데모 영상
 
