@@ -18,7 +18,7 @@
 - 시퀀스 다이어그램
 ![KakaoTalk_20230607_002343052](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/f8162ec1-460a-4372-aa99-fb71fec1fe69)
 
-- 백 엔드 동작 요약
+- 백 엔드 동작 요약 
 ![dd drawio](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/bd547d9b-5b66-42a8-981e-bfef7a0fe150)
 
 
