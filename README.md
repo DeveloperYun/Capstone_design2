@@ -5,7 +5,8 @@
 - 멘토 기업 : (주)데이터센트릭
 - Notion : https://hexagonal-knot-7e4.notion.site/3-e433a2ca79764aac888870b857cb3d4b?pvs=4
 - 소개
--- 
+  ㅇㅇ  
+  
 
 ## 웹
 
