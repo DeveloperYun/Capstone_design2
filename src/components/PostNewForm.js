@@ -77,6 +77,7 @@ export default function PostNewForm() {
         }
       );
       console.log("success response :", response);
+      alert("이미지를 라벨링 했습니다. 학습을 진행하세요!");
       history("/");
     } catch (error) {
       console.log("error: ", error);
