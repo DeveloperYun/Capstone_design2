@@ -22,6 +22,7 @@
 ![dd drawio](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/bd547d9b-5b66-42a8-981e-bfef7a0fe150)
 
 
+
 ## 모델
 ---
 ### 벤치마킹 결과 종합  
@@ -33,6 +34,7 @@
 
 ---
 ### 논문 소개
+[한국정보지능시스템학회] https://www.kiiss.or.kr/conference/conf/sub03.html
 
 ---
 ### 회의록
