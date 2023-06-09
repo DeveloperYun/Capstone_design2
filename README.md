@@ -41,11 +41,11 @@
 ### 논문 소개
 - [한국정보지능시스템학회] https://www.kiiss.or.kr/conference/conf/sub03.html
 ![20230608_160919](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/52c8e1f2-c2c5-44e1-959d-3562a5a9bcaa)
-![20230608_160852](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/c0ed47f6-2361-4948-8acc-c6ec01a4d70f)
-![20230608_160906](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/a9dc766f-a395-4ab9-ba3f-195bebea4fbe)
+![논문한짤](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/2322d1ce-d2ca-4235-8fed-40e39aec417e)
+
 ---
 ### 회의록
   ##### https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
 ---
 ### 데모 영상
-
+  ##### https://www.youtube.com/watch?v=nQkTkpfFr_0
