@@ -12,7 +12,7 @@
   - 개발 도구 : vscode, github, notion, conda 4.12.0, Colab
   - 사용 언어 : Python 3.9, javascript, MySQL
   - 사용 프레임워크 : Django 3.2.18 , React 18.2
-  - 핵심 라이브러리 : Pytorch 2.0.1 + cu118 
+  - 모델링 : Pytorch 2.0.1 + cu118 
 
 - 시스템 구조도
 ![20230608_154929](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/a074085b-dd6e-41c0-a9e0-3c34a21b9d0b)
@@ -30,8 +30,12 @@
 
 ## 모델
 ---
+### 벤치마킹 
+- 8종의 모델을 선정하여 cifar-10 데이터셋을 사용하여 동일한 환경에서의 성능 비교 후 최종 모델 선정을 위한 실험 
+- 
 ### 벤치마킹 결과 종합  (https://hexagonal-knot-7e4.notion.site/5a48f5837603404b8feba8e6bc414c38?pvs=4) 
-![20230608_160428](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/ea986f7d-2744-43d5-91af-9028d7415171)
+![20230608_160428](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/ea986f7d-2744-43d5-91af-9028d7415171) 
+
 세진 : https://github.com/sejin1129/BenchMarking  
 준수 : https://github.com/githeoheo/Pytorch-benchmarking.git  
 해빈 : https://github.com/DeveloperYun/Pytorch_benchmark  
