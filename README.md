@@ -33,7 +33,7 @@
 ### 벤치마킹 
 - 8종의 모델을 선정하여 cifar-10 데이터셋을 사용하여 동일한 환경에서의 성능 비교 후 최종 모델 선정을 위한 실험 
 - 
-### 벤치마킹 결과 종합  (https://hexagonal-knot-7e4.notion.site/5a48f5837603404b8feba8e6bc414c38?pvs=4) 
+### 벤치마킹 결과 종합  #####(https://hexagonal-knot-7e4.notion.site/5a48f5837603404b8feba8e6bc414c38?pvs=4) 
 ![20230608_160428](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/ea986f7d-2744-43d5-91af-9028d7415171) 
 
 세진 : https://github.com/sejin1129/BenchMarking  
