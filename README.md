@@ -37,7 +37,8 @@
 - 학습절차
   1. cifar-10 dataset : 훈련 데이터 5만, 검증 데이터 1만, 10개의 classes 분류.
   2. testModel 8종 선정 및 모델 학습
-  3. 모델 검증
+      - Alexnet, Efficient_b0, vgg-16, resnet50, mobilenet_V3, Mnasnet0_5, ShuffleNet_v2_1_0, mobilenet_v2
+  4. 모델 검증
 
 - 테스트 목표
   1. 학습횟수에 따른 모델 정확도 추이 확인
