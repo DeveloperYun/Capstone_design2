@@ -26,6 +26,8 @@
 - 백 엔드 동작 요약 
 ![dd drawio](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/bd547d9b-5b66-42a8-981e-bfef7a0fe150)
 
+- 컴포넌트 구조도
+![컴포넌트 다이어그램](https://github.com/DeveloperYun/Capstone_design2/assets/90898067/60a3a292-a619-4d49-81b2-a82702504172)
 
 
 ## 모델
