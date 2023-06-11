@@ -67,6 +67,9 @@
 ![논문한짤](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/2322d1ce-d2ca-4235-8fed-40e39aec417e)
 
 ---
+### sw 등록
+  ##### 진행중
+---
 ### 회의록
   ##### https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
 ---
