@@ -21,7 +21,7 @@
   - 모델링 : Pytorch 2.0.1 + cu118 
 
 - 시스템 구조도
-![20230608_154929](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/a074085b-dd6e-41c0-a9e0-3c34a21b9d0b)
+  ![20230608_154929](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/a074085b-dd6e-41c0-a9e0-3c34a21b9d0b)
 
 - 유즈케이스 다이어그램
 ![KakaoTalk_20230605_171325262](https://github.com/DeveloperYun/Capstone_design2/assets/81633639/4d9155fd-eccf-4371-98bb-186b2054f5fb)
