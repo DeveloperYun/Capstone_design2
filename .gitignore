@@ -1,0 +1,10 @@
+*.pyz
+__pycache__
+*.log
+db.sqlite3
+.idea
+*.png
+*.jpg
+*.pth
+*.zip
+*.jpeg
