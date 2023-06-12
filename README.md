@@ -1,4 +1,4 @@
-# 경북대 컴퓨터학부 종합설계프로젝트2 
+# 종프2 => 모델링파트
 ---
 ### 벤치마킹 결과 종합  
 세진 : https://github.com/sejin1129/BenchMarking  
