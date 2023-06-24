@@ -80,7 +80,8 @@
 
 ---
 ### sw 등록
-  ##### 진행중
+  ##### [sw등록.pdf](https://github.com/DeveloperYun/Capstone_design2/files/11856768/sw.pdf)
+
 ---
 ### 회의록
   ##### https://www.notion.so/72c135fee5494b688630613c510c40b7?pvs=4
